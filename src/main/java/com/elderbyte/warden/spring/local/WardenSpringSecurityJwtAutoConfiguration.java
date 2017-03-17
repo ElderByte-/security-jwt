@@ -9,6 +9,7 @@ import com.elderbyte.warden.spring.local.jwt.DefaultJwtAuthenticationProvider;
 import com.elderbyte.warden.spring.local.jwt.DefaultJwtTokenConverter;
 import com.elderbyte.warden.spring.local.jwt.JWSVerifierService;
 import com.elderbyte.warden.spring.local.jwt.JwtTokenConverter;
+import com.elderbyte.warden.spring.rsa.PropertyRSAPublicKeyProvider;
 import com.elderbyte.warden.spring.rsa.RSAPublicKeyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -58,6 +59,12 @@ public class WardenSpringSecurityJwtAutoConfiguration {
     @Bean
     public LocalAuthService LocalAuthService() {
         return new LocalAuthService();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(RSAPublicKeyProvider.class)
+    public RSAPublicKeyProvider RSAPublicKeyProvider(){
+        return new PropertyRSAPublicKeyProvider(clientSettings);
     }
 
     @Bean

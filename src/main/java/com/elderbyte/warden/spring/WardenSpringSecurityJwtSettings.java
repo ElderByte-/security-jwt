@@ -20,9 +20,9 @@ public class WardenSpringSecurityJwtSettings {
      * The realm of this client.
      *
      * - Incoming JWT tokens need to have this realm to be accepted
+     * - May be null to omit realm check
      * - If you use the login-proxy, this is the realm used to authenticate against
      *
-     * - If a embedded running warden server is present this is the default realm.
      */
     private String realm;
 
@@ -30,15 +30,8 @@ public class WardenSpringSecurityJwtSettings {
      * The public RSA key which is used to verify JWT tokens.
      * This public key must be the counterpart of the authentication server's private key used to sign the token.
      *
-     * - If a embedded running warden server is present it uses his own public-key.
      */
     private String publicKeyValue;
-
-    /**
-     * The warden server url. In a cloud environment, the warden service is
-     * discovered by Eureka. By setting this property, Eureka is not used / required.
-     */
-    private String url;
 
 
     private boolean enableMock;
@@ -59,15 +52,6 @@ public class WardenSpringSecurityJwtSettings {
     public void setPublicKeyValue(String publicKeyValue) {
         this.publicKeyValue = publicKeyValue;
     }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
 
     public List<MockUser> getMockUsers() {
         return mockUsers;

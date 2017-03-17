@@ -74,7 +74,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 task upload {
-    dependsOn 'warden-client:bintrayUpload'
+    dependsOn bintrayUpload
 }
 
 task wrapper(type: Wrapper) {

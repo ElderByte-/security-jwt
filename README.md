@@ -1,3 +1,7 @@
+
+[ ![Download](https://api.bintray.com/packages/elderbyte/maven/warden-spring-security-jwt/images/download.svg) ](https://bintray.com/elderbyte/maven/warden-spring-security-jwt/_latestVersion) 
+
+
 # Spring Security JWT integration
 
 This project provides an out of the box working JWT integration into Spring security, using springs auto-configuration features.

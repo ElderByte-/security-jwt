@@ -56,7 +56,7 @@ public class JWSVerifierService {
                 .maximumSize(100)
                 .refreshAfterWrite(5, TimeUnit.MINUTES)
                 .expireAfterAccess(10, TimeUnit.MINUTES)
-                .build(key -> buildJWSVerifier(key));
+                .build(realm -> buildJWSVerifier(realm));
     }
 
     /***************************************************************************
@@ -109,7 +109,7 @@ public class JWSVerifierService {
             });
             return verifierCache.get(realm);
         }catch (Exception e){
-            throw new GeneralSecurityException("Failed to build JWS verifier!", e);
+            throw new GeneralSecurityException("Failed to verify JWT - token will not be accepted!", e);
         }
     }
 

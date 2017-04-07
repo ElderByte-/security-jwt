@@ -18,7 +18,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'maven-publish'
 
 
-version =  '1.0.3'
+version =  '1.0.4'
 group = 'com.elderbyte.warden'
 
 tasks.withType(Javadoc) {

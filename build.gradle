@@ -55,7 +55,7 @@ dependencies {
     compile("javax.servlet:javax.servlet-api")
 
     // Utilities
-    compile("com.nimbusds:nimbus-jose-jwt:4.3")
+    compile("com.nimbusds:nimbus-jose-jwt:4.34.2")
     compile("com.github.ben-manes.caffeine:caffeine")
 
     // Test dependencies

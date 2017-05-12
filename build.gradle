@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
     }
 }
 
@@ -18,7 +18,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'maven-publish'
 
 
-version =  '1.0.4'
+version =  '1.1.0'
 group = 'com.elderbyte.warden'
 
 tasks.withType(Javadoc) {
@@ -55,7 +55,7 @@ dependencies {
     compile("javax.servlet:javax.servlet-api")
 
     // Utilities
-    compile("com.nimbusds:nimbus-jose-jwt:4.34.2")
+    compile("com.nimbusds:nimbus-jose-jwt:4.37.1")
     compile("com.github.ben-manes.caffeine:caffeine")
 
     // Test dependencies
@@ -78,7 +78,7 @@ task upload {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
+    gradleVersion = '3.5'
 }
 
 // Publishing

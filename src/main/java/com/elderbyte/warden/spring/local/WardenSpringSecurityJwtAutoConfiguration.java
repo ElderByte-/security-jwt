@@ -5,10 +5,7 @@ import com.elderbyte.warden.spring.local.auth.LocalAuthService;
 import com.elderbyte.warden.spring.local.config.AccessDeniedExceptionHandler;
 import com.elderbyte.warden.spring.local.config.DefaultWardenSecurityConfig;
 import com.elderbyte.warden.spring.local.auth.RestAuthenticationEntryPoint;
-import com.elderbyte.warden.spring.local.jwt.DefaultJwtAuthenticationProvider;
-import com.elderbyte.warden.spring.local.jwt.DefaultJwtTokenConverter;
-import com.elderbyte.warden.spring.local.jwt.JWSVerifierService;
-import com.elderbyte.warden.spring.local.jwt.JwtTokenConverter;
+import com.elderbyte.warden.spring.local.jwt.*;
 import com.elderbyte.warden.spring.rsa.PropertyRSAPublicKeyProvider;
 import com.elderbyte.warden.spring.rsa.RSAPublicKeyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +43,8 @@ public class WardenSpringSecurityJwtAutoConfiguration {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(JWSVerifierService jwsVerifierService){
-        return new DefaultJwtAuthenticationProvider(jwsVerifierService);
+    public AuthenticationProvider authenticationProvider(JwtValidationService validationService){
+        return new DefaultJwtAuthenticationProvider(validationService);
     }
 
     @Bean
@@ -73,4 +70,9 @@ public class WardenSpringSecurityJwtAutoConfiguration {
         return new JWSVerifierService(clientSettings, rsaPublicKeyProvider);
     }
 
+    @Bean
+    @ConditionalOnMissingBean(JwtValidationService.class)
+    public JwtValidationService jwsVerifierService(JWSVerifierService jwsVerifierService){
+        return new JwtValidationService(jwsVerifierService);
+    }
 }

@@ -34,7 +34,7 @@ public class DefaultJwtAuthenticationProvider implements AuthenticationProvider 
         AuthenticationDetail auth = (AuthenticationDetail)authentication;
         SignedJWT token = (SignedJWT) auth.getDetails();
 
-        jwsVerifierService.verifyOrThrow(token, auth);
+        jwsVerifierService.verifyOrThrow(token);
 
         // The token has a valid signature (we can trust its content)
         checkVerifiedToken(token);

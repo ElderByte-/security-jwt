@@ -17,6 +17,8 @@ import org.springframework.security.core.AuthenticationException;
 
 import java.security.GeneralSecurityException;
 import java.security.interfaces.RSAPublicKey;
+import java.text.ParseException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -68,13 +70,13 @@ public class JWSVerifierService {
     /**
      * Verifies the given JWT token
      * @param token The JWT token
-     * @param auth authentication details
      * @throws AuthenticationException Thrown when the given token is not valid / key is wrong
      */
-    public void verifyOrThrow(SignedJWT token, AuthenticationDetail auth) throws AuthenticationException {
+    public void verifyOrThrow(SignedJWT token) throws AuthenticationException {
+        String realm = getRealm(token);
+        if(realm == null) throw new IllegalArgumentException("Jwt does not contain a realm/audience claim, can't authenticate.");
         try {
-            JWSVerifier verifier = getTokenVerifier(auth);
-
+            JWSVerifier verifier = getTokenVerifier(realm);
             if (!token.verify(verifier)) {
                 throw new JwtAuthenticationException("Authentication failed - MAC/RSA signature not matching!");
             }
@@ -92,14 +94,28 @@ public class JWSVerifierService {
      **************************************************************************/
 
     /**
+     * Returns the realm from the given jwt token.
+     * @param token The jwt
+     * @return Returns the realm claim (audience)
+     */
+    private String getRealm(SignedJWT token){
+        try {
+            List<String> audience =  token.getJWTClaimsSet().getAudience();
+            if(audience.size() > 0){
+                return audience.get(0);
+            }else{
+                throw new JwtAuthenticationException("There was no audience claim in the given JWT - cant deduce realm!");
+            }
+        } catch (Exception e) {
+            throw new JwtAuthenticationException("Failed to extract realm from jwt!", e);
+        }
+    }
+
+    /**
      * Returns a verifier which can check JSON Web signatures.
      * @throws GeneralSecurityException If the public key could not be found or loaded.
      */
-    private JWSVerifier getTokenVerifier(AuthenticationDetail auth) throws GeneralSecurityException {
-
-        if(auth.getRealm() == null) throw new JwtAuthenticationException("Jwt does not contain a realm/audience claim, can't authenticate.");
-
-        String realm = auth.getRealm();
+    private JWSVerifier getTokenVerifier(String realm) throws GeneralSecurityException {
 
         try{
             wardenClientSettings.getRealm().ifPresent(requiredRealm -> {

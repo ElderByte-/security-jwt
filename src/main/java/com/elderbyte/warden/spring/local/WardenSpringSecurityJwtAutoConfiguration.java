@@ -72,7 +72,7 @@ public class WardenSpringSecurityJwtAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(JwtValidationService.class)
-    public JwtValidationService jwsVerifierService(JWSVerifierService jwsVerifierService){
+    public JwtValidationService jwtValidationService(JWSVerifierService jwsVerifierService){
         return new JwtValidationService(jwsVerifierService);
     }
 }

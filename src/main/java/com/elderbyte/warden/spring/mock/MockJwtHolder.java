@@ -62,7 +62,7 @@ public class MockJwtHolder {
 
             builder.issuer("Warden Client Mocker");
             builder.audience(user.getRealm());
-            builder.subject(user.getLogin());
+            builder.subject(user.getRealm()+"/"+user.getLogin());
             builder.claim("name", user.getFullName());
             builder.claim("lang", "en");
             builder.claim("roles", roles);

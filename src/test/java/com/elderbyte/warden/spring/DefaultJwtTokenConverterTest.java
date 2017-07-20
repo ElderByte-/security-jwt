@@ -41,7 +41,7 @@ public class DefaultJwtTokenConverterTest {
 
        builder.issuer("myissuer");
        builder.audience("myRealm");
-       builder.subject("myLogin");
+       builder.subject("myRealm/myLogin");
        builder.claim("name", "Firstname Lastname");
        builder.claim("lang", "en");
        builder.claim("roles", roles);
@@ -52,8 +52,9 @@ public class DefaultJwtTokenConverterTest {
 
 
        Assert.assertEquals("myRealm", authenticationDetail.getRealm());
-       Assert.assertEquals("myLogin", authenticationDetail.getSubject());
-       Assert.assertEquals("myLogin", authenticationDetail.getPrincipal());
+       Assert.assertEquals("myRealm/myLogin", authenticationDetail.getSubject());
+       Assert.assertEquals("myLogin", authenticationDetail.getLoginName());
+       Assert.assertEquals("myRealm/myLogin", authenticationDetail.getPrincipal());
 
        Assert.assertEquals("Firstname Lastname", authenticationDetail.getName());
 

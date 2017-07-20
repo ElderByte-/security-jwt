@@ -17,11 +17,26 @@ public interface AuthenticationDetail extends Authentication {
     String getRealm();
 
     /**
-     * Gets the user login name or id unique in the given realm.
-     *
+     * Gets the unique user login name, usually prefixed by the domain  / realm:
+     * <p>
+     * format:  'realm/user.name'
+     * <p>
      * This is a short-hand for the generic getPrincipal()
      */
     String getSubject();
+
+
+    /**
+     * Gets the local user login name part from the subject.
+     */
+    default String getLoginName() {
+        String subject = getSubject();
+        if(subject != null){
+            String[] parts = subject.split("/");
+            return parts[parts.length-1];
+        }
+        return null;
+    }
 
     /**
      * Checks if the given Principal has the given role

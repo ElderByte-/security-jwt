@@ -55,7 +55,7 @@ public class AuthenticationDetailImpl implements AuthenticationDetail {
     }
 
     /**
-     * Gets a indentifier of the current subject.
+     * Gets a identifier of the current subject.
      * A subject is guaranteed to be unique at least within a realm.
      */
     @Override
@@ -113,7 +113,7 @@ public class AuthenticationDetailImpl implements AuthenticationDetail {
 
     @Override
     public String toString(){
-        return getRealm() + "/" + getSubject() + " (" + getName() + ") " + getRolesString();
+        return getSubject() + " (" + getName() + ") " + getRolesString();
     }
 
     private String getRolesString(){

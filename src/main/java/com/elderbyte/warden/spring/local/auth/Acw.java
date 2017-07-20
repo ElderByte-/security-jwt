@@ -17,17 +17,17 @@ public abstract class Acw {
     /**
      * The current user must have the given login-id
      */
-    public static Acw hasLogin(String userId){
-        return has(auth -> Objects.equals(auth.getSubject(), userId));
+    public static Acw hasLogin(String loginName){
+        return has(auth -> Objects.equals(auth.getLoginName(), loginName));
     }
 
     /**
      * The current user must have the given login-id and realm
      */
-    public static Acw hasRealmLogin(String realmId, String userId){
+    public static Acw hasRealmLogin(String realmId, String loginName){
         return has(auth ->
             Objects.equals(auth.getRealm(), realmId) &&
-            Objects.equals(auth.getSubject(), userId));
+            Objects.equals(auth.getLoginName(), loginName));
     }
 
     /**

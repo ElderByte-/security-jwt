@@ -21,8 +21,12 @@ public final class SecurityUtils {
     public static AuthenticationDetail getAuthentication(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if(auth instanceof AuthenticationDetail){
-            return (AuthenticationDetail)auth;
+        if(auth != null){
+            if(auth instanceof AuthenticationDetail){
+                return (AuthenticationDetail)auth;
+            }else{
+                throw new IllegalStateException("There was an Authentication in the Security-Context but it does not support 'AuthenticationDetail'. " + auth);
+            }
         }
         return null;
     }
@@ -31,10 +35,9 @@ public final class SecurityUtils {
      * Get the login of the current user.
      */
     public static String getCurrentLogin() {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth instanceof AuthenticationDetail){
-            return ((AuthenticationDetail)auth).getSubject();
+        AuthenticationDetail auth = getAuthentication();
+        if(auth != null){
+            return auth.getLoginName();
         }
         return null;
     }

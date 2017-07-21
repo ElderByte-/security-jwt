@@ -1,5 +1,7 @@
 package com.elderbyte.warden.spring.local.auth;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -11,6 +13,8 @@ import java.util.function.Predicate;
  * Utility class for Spring Security.
  */
 public final class SecurityUtils {
+
+    private static final Logger logger = LoggerFactory.getLogger(SecurityUtils.class);
 
     private SecurityUtils() {
     }
@@ -25,7 +29,7 @@ public final class SecurityUtils {
             if(auth instanceof AuthenticationDetail){
                 return (AuthenticationDetail)auth;
             }else{
-                throw new IllegalStateException("There was an Authentication in the Security-Context but it does not support 'AuthenticationDetail'. " + auth);
+                logger.warn("There was an Authentication in the Security-Context but it does not support 'AuthenticationDetail'. " + auth);
             }
         }
         return null;

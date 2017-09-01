@@ -3,6 +3,7 @@ package com.elderbyte.warden.spring.local.config;
 import com.elderbyte.warden.spring.local.auth.AuthenticationDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,6 +17,7 @@ import java.io.IOException;
 /**
  * Maps AccessDeniedException to a UNAUTHORIZED HTTP CODE
  */
+@Order(100) // Give this controller advice a quite high order so it applies before any generic handlers
 @ControllerAdvice
 public class AccessDeniedExceptionHandler {
 

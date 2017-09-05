@@ -6,7 +6,7 @@ import com.elderbyte.warden.spring.local.config.AccessDeniedExceptionHandler;
 import com.elderbyte.warden.spring.local.config.DefaultWardenSecurityConfig;
 import com.elderbyte.warden.spring.local.auth.RestAuthenticationEntryPoint;
 import com.elderbyte.warden.spring.local.jwt.*;
-import com.elderbyte.warden.spring.mock.MockConfiguration;
+import com.elderbyte.warden.spring.mock.WardenSpringSecurityMockConfiguration;
 import com.elderbyte.warden.spring.rsa.PropertyRSAPublicKeyProvider;
 import com.elderbyte.warden.spring.rsa.RSAPublicKeyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 @Configuration
 @EnableConfigurationProperties
 @Import({
-        MockConfiguration.class,
+        WardenSpringSecurityMockConfiguration.class,
         WardenSpringSecurityJwtSettings.class,
         AccessDeniedExceptionHandler.class,
         DefaultWardenSecurityConfig.class,

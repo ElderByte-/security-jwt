@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Primary;
 
 @Configuration
 @ConditionalOnProperty("warden.client.enableMock")
-public class MockConfiguration {
+public class WardenSpringSecurityMockConfiguration {
 
     @Bean
     public MockJwtHolder mockJwtHolder(WardenSpringSecurityJwtSettings settings){

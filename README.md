@@ -49,6 +49,6 @@ public void mySecuredMethod(){
 While developing your secured Spring Application, the security can be quite an obstacle. 
 You could disable it completely, however, a better alternative with more possiblities is to just mock a security context.
 
-
+`warden.client.enableMock: true`
 
 

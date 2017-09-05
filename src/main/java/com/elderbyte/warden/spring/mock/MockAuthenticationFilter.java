@@ -21,11 +21,11 @@ public class MockAuthenticationFilter extends GenericFilterBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final MockJwtService mockJwtService;
+    private final MockJwtHolder mockJwtHolder;
 
-    public MockAuthenticationFilter(MockJwtService mockJwtService){
-        if(mockJwtService == null) throw new IllegalArgumentException("mockJwtService must not be NULL!");
-        this.mockJwtService = mockJwtService;
+    public MockAuthenticationFilter(MockJwtHolder mockJwtHolder){
+        if(mockJwtHolder == null) throw new IllegalArgumentException("mockJwtHolder must not be NULL!");
+        this.mockJwtHolder = mockJwtHolder;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MockAuthenticationFilter extends GenericFilterBean {
             throws IOException, ServletException {
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
-            mockJwtService.authenticateWithMock();
+            mockJwtHolder.authenticateWithMock();
         }
         else {
             if (logger.isDebugEnabled()) {

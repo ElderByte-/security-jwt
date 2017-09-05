@@ -2,7 +2,7 @@ package com.elderbyte.warden.spring.integrationtest;
 
 import com.elderbyte.warden.spring.WardenSpringSecurityJwtSettings;
 import com.elderbyte.warden.spring.local.auth.SecurityUtils;
-import com.elderbyte.warden.spring.mock.MockJwtService;
+import com.elderbyte.warden.spring.mock.MockJwtHolder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ public class TestMockUser {
     private WardenSpringSecurityJwtSettings settings;
 
     @Autowired
-    private MockJwtService mockJwtService;
+    private MockJwtHolder mockJwtHolder;
 
     @Test
     public void ensureMockEnabled(){

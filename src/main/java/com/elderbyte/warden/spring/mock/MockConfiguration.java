@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Primary;
 public class MockConfiguration {
 
     @Bean
-    public MockJwtService mockJwtService(WardenSpringSecurityJwtSettings settings){
-        return new MockJwtService(settings);
+    public MockJwtHolder mockJwtHolder(WardenSpringSecurityJwtSettings settings){
+        return new MockJwtHolder(settings);
     }
 
     @Bean
     @Primary
-    public RSAPublicKeyProvider mockRSAPublicKeyProvider(MockJwtService mockJwtService){
-        return realm ->  mockJwtService.getMockPublicKey();
+    public RSAPublicKeyProvider mockRSAPublicKeyProvider(MockJwtHolder mockJwtHolder){
+        return realm ->  mockJwtHolder.getMockPublicKey();
     }
 }

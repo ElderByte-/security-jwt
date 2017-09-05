@@ -1,6 +1,5 @@
 package com.elderbyte.warden.spring.mock;
 
-
 import com.elderbyte.warden.spring.WardenSpringSecurityJwtSettings;
 import com.elderbyte.warden.spring.local.auth.AuthenticationDetail;
 import com.elderbyte.warden.spring.local.auth.AuthenticationDetailImpl;
@@ -26,9 +25,10 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class MockJwtService {
+
+
+public class MockJwtHolder {
 
     /***************************************************************************
      *                                                                         *
@@ -50,7 +50,7 @@ public class MockJwtService {
 
 
     @Autowired
-    public MockJwtService(WardenSpringSecurityJwtSettings clientSettings){
+    public MockJwtHolder(WardenSpringSecurityJwtSettings clientSettings){
 
         this.clientSettings = clientSettings;
 
@@ -101,6 +101,31 @@ public class MockJwtService {
         return mockPublicKey;
     }
 
+    public JWT getSignedJWTMock(MockUser user){
+        try {
+            // Create RSA-signer with the private key
+            JWSSigner signer = new RSASSASigner(mockPrivateKey);
+
+            JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
+
+            List<String> roles = Arrays.asList(user.getRoles());
+
+            builder.issuer("Warden Client Mocker");
+            builder.audience(user.getRealm());
+            builder.subject(user.getRealm()+"/"+user.getLogin());
+            builder.claim("name", user.getFullName());
+            builder.claim("lang", "en");
+            builder.claim("roles", roles);
+            builder.expirationTime(new Date(new Date().getTime() + (12*60*60*1000)));
+            SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), builder.build());
+            signedJWT.sign(signer);
+
+            return signedJWT;
+        }catch (JOSEException e){
+            throw new RuntimeException("Failed to create mock JWT token!", e);
+        }
+    }
+
     /***************************************************************************
      *                                                                         *
      * Private methods                                                         *
@@ -129,33 +154,6 @@ public class MockJwtService {
         auth.setAuthenticated(true);
         SecurityContextHolder.getContext().setAuthentication(auth);
         logger.warn("SecurityContextHolder populated with mock authentication. For development purposes only!");
-    }
-
-
-
-    private JWT getSignedJWTMock(MockUser user){
-        try {
-            // Create RSA-signer with the private key
-            JWSSigner signer = new RSASSASigner(mockPrivateKey);
-
-            JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
-
-            List<String> roles = Arrays.asList(user.getRoles());
-
-            builder.issuer("Warden Client Mocker");
-            builder.audience(user.getRealm());
-            builder.subject(user.getRealm()+"/"+user.getLogin());
-            builder.claim("name", user.getFullName());
-            builder.claim("lang", "en");
-            builder.claim("roles", roles);
-            builder.expirationTime(new Date(new Date().getTime() + (12*60*60*1000)));
-            SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), builder.build());
-            signedJWT.sign(signer);
-
-            return signedJWT;
-        }catch (JOSEException e){
-            throw new RuntimeException("Failed to create mock JWT token!", e);
-        }
     }
 
 

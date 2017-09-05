@@ -2,8 +2,7 @@ package com.elderbyte.warden.spring.local.config;
 
 import com.elderbyte.warden.spring.local.auth.LocalAuthService;
 import com.elderbyte.warden.spring.local.jwt.JwtAuthenticationFilter;
-import com.elderbyte.warden.spring.mock.MockAuthenticationFilter;
-import com.elderbyte.warden.spring.mock.MockJwtService;
+import com.elderbyte.warden.spring.mock.MockJwtHolder;
 import com.elderbyte.warden.spring.WardenSpringSecurityJwtSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class DefaultWardenWebSecurityConfiguration extends WebSecurityConfigurer
     private WardenSpringSecurityJwtSettings clientSettings;
 
     @Autowired(required = false)
-    private MockJwtService mockJwtService;
+    private MockJwtHolder mockJwtHolder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,7 +42,7 @@ public class DefaultWardenWebSecurityConfiguration extends WebSecurityConfigurer
         /*
         if (clientSettings.isEnableMock()){
             logger.info("Enabling mock user authentication filter!");
-            http.addFilterAfter(new MockAuthenticationFilter(mockJwtService), JwtAuthenticationFilter.class);
+            http.addFilterAfter(new MockAuthenticationFilter(mockJwtHolder), JwtAuthenticationFilter.class);
         }*/
     }
 }

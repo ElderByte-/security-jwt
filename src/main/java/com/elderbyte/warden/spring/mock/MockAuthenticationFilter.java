@@ -1,9 +1,5 @@
 package com.elderbyte.warden.spring.mock;
 
-import com.elderbyte.warden.spring.WardenSpringSecurityJwtSettings;
-import com.elderbyte.warden.spring.local.auth.AuthenticationDetail;
-import com.elderbyte.warden.spring.local.auth.AuthenticationDetailImpl;
-import com.elderbyte.warden.spring.local.auth.AuthorityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,16 +21,11 @@ public class MockAuthenticationFilter extends GenericFilterBean {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final WardenSpringSecurityJwtSettings clientSettings;
-    private final MockJwtHolder mockJwtHolder;
+    private final MockJwtService mockJwtService;
 
-    public MockAuthenticationFilter(WardenSpringSecurityJwtSettings clientSettings, MockJwtHolder mockJwtHolder){
-
-        if(clientSettings == null) throw new IllegalArgumentException("clientSettings");
-        if(mockJwtHolder == null) throw new IllegalArgumentException("mockJwtHolder");
-
-        this.clientSettings = clientSettings;
-        this.mockJwtHolder = mockJwtHolder;
+    public MockAuthenticationFilter(MockJwtService mockJwtService){
+        if(mockJwtService == null) throw new IllegalArgumentException("mockJwtService must not be NULL!");
+        this.mockJwtService = mockJwtService;
     }
 
     @Override
@@ -42,25 +33,7 @@ public class MockAuthenticationFilter extends GenericFilterBean {
             throws IOException, ServletException {
 
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
-
-
-            if(!clientSettings.getMockUsers().isEmpty()){
-                MockUser mockUser = clientSettings.getMockUsers().get(0);
-
-                AuthenticationDetail auth = new AuthenticationDetailImpl(
-                        mockUser.getRealm(),
-                        mockUser.getLogin(),
-                        mockUser.getFullName(),
-                        AuthorityUtil.createAuthorities(mockUser.getRoles()),
-                        mockJwtHolder.getSignedJWTMock(mockUser)
-                );
-                auth.setAuthenticated(true);
-                SecurityContextHolder.getContext().setAuthentication(auth);
-
-                logger.warn("SecurityContextHolder populated with mock authentication. For development purposes only!");
-            }else{
-                logger.warn("Cant inject mock user into auth since no mock user was defined!");
-            }
+            mockJwtService.authenticateWithMock();
         }
         else {
             if (logger.isDebugEnabled()) {
@@ -68,8 +41,6 @@ public class MockAuthenticationFilter extends GenericFilterBean {
                         + SecurityContextHolder.getContext().getAuthentication() + "'");
             }
         }
-
         chain.doFilter(request, response);
-
     }
 }

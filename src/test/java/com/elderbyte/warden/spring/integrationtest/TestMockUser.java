@@ -1,39 +1,37 @@
 package com.elderbyte.warden.spring.integrationtest;
 
 import com.elderbyte.warden.spring.WardenSpringSecurityJwtSettings;
-import com.elderbyte.warden.spring.local.auth.LocalAuthService;
 import com.elderbyte.warden.spring.local.auth.SecurityUtils;
+import com.elderbyte.warden.spring.mock.MockJwtService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = IntegrationTestApp.class)
-public class SpringContextLoadingTest {
-
-    @Autowired
-    private LocalAuthService authService;
+@TestPropertySource(properties = {
+        "warden.client.enableMock=true"
+})
+public class TestMockUser {
 
     @Autowired
     private WardenSpringSecurityJwtSettings settings;
 
-    @Test
-    public void contextLoads(){
-        Assert.assertTrue(authService != null);
-    }
-
+    @Autowired
+    private MockJwtService mockJwtService;
 
     @Test
-    public void ensureMockNotEnabled(){
-        Assert.assertFalse("Mock should be disabled by default!",settings.isEnableMock());
+    public void ensureMockEnabled(){
+        Assert.assertTrue("Mocking should be enabled in this test!", settings.isEnableMock());
     }
 
     @Test
-    public void ensureMockNotLoaded(){
-        Assert.assertTrue("There should be no authentication context when mock is disabled!",SecurityUtils.getAuthentication() == null);
+    public void ensureMockLoaded(){
+        Assert.assertTrue("There should be a mocked authentication present!", SecurityUtils.getAuthentication() != null);
     }
 }

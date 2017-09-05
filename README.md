@@ -47,8 +47,16 @@ public void mySecuredMethod(){
 ### Mocking Security for testing / development
 
 While developing your secured Spring Application, the security can be quite an obstacle. 
-You could disable it completely, however, a better alternative with more possiblities is to just mock a security context.
+If you enable mocking, the spring security context will get mocked for you:
 
-`warden.client.enableMock: true`
+```
+warden.client:
+  enableMock: true
+  mockUsers:
+      - realm: mycompany
+        login: foo.bar
+        fullName: Foo Bar
+        roles: COOL_ADMIN, USER
+```
 
 

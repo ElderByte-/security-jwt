@@ -2,6 +2,7 @@ package com.elderbyte.warden.spring.local.config;
 
 import com.elderbyte.warden.spring.local.auth.LocalAuthService;
 import com.elderbyte.warden.spring.local.jwt.JwtAuthenticationFilter;
+import com.elderbyte.warden.spring.mock.MockAuthenticationFilter;
 import com.elderbyte.warden.spring.mock.MockJwtHolder;
 import com.elderbyte.warden.spring.WardenSpringSecurityJwtSettings;
 import org.slf4j.Logger;
@@ -39,10 +40,14 @@ public class DefaultWardenWebSecurityConfiguration extends WebSecurityConfigurer
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(new JwtAuthenticationFilter(localAuthService), AnonymousAuthenticationFilter.class);
 
-        /*
+
         if (clientSettings.isEnableMock()){
-            logger.info("Enabling mock user authentication filter!");
-            http.addFilterAfter(new MockAuthenticationFilter(mockJwtHolder), JwtAuthenticationFilter.class);
-        }*/
+            if(mockJwtHolder != null){
+                logger.info("Enabling mock user authentication filter!");
+                http.addFilterAfter(new MockAuthenticationFilter(mockJwtHolder), JwtAuthenticationFilter.class);
+            }else{
+                throw new IllegalStateException("Cant configure mock filter because mock service 'mockJwtHolder' is not available! This looks like a configuration issue.");
+            }
+        }
     }
 }

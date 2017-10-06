@@ -111,11 +111,13 @@ public class MockJwtHolder {
             List<String> roles = Arrays.asList(user.getRoles());
 
             builder.issuer("Warden Client Mocker");
-            builder.audience(user.getRealm());
             builder.subject(user.getRealm()+"/"+user.getLogin());
             builder.claim("name", user.getFullName());
             builder.claim("lang", "en");
             builder.claim("roles", roles);
+            builder.claim("realm", user.getRealm());
+
+
             builder.expirationTime(new Date(new Date().getTime() + (12*60*60*1000)));
             SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), builder.build());
             signedJWT.sign(signer);

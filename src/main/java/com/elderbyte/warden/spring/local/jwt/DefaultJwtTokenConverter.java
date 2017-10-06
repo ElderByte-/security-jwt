@@ -34,14 +34,23 @@ public class DefaultJwtTokenConverter implements JwtTokenConverter {
 
         Set<GrantedAuthority> authorities = getAuthorities(claims);
 
-        String aud = (claims.getAudience() != null && !claims.getAudience().isEmpty()) ? claims.getAudience().get(0) : null;
-
         return new AuthenticationDetailImpl(
-                aud,
+                getRealm(claims),
                 claims.getSubject(),
                 claims.getStringClaim("name"),
                 authorities,
                 sjwt);
+    }
+
+
+    private String getRealm(JWTClaimsSet claims) throws ParseException {
+        String realm = claims.getStringClaim("realm");
+        if(realm == null || realm.isEmpty()){
+            // Fall back to legacy handling, attempt to extract realm from audience claim
+            // TODO Remove Legacy handling
+            realm = (claims.getAudience() != null && !claims.getAudience().isEmpty()) ? claims.getAudience().get(0) : null;
+        }
+        return realm;
     }
 
 

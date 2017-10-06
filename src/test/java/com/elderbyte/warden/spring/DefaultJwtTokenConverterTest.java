@@ -40,11 +40,12 @@ public class DefaultJwtTokenConverterTest {
        roles.add("admin");
 
        builder.issuer("myissuer");
-       builder.audience("myRealm");
        builder.subject("myRealm/myLogin");
        builder.claim("name", "Firstname Lastname");
        builder.claim("lang", "en");
        builder.claim("roles", roles);
+       builder.claim("realm","myRealm");
+
 
        JWT jwt = new PlainJWT(builder.build());
 

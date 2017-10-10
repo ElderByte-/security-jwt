@@ -12,31 +12,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 public interface AuthenticationDetail extends Authentication {
 
     /**
-     * Gets the security realm of this user
+     * Gets the security realm of this user.
      */
     String getRealm();
 
     /**
-     * Gets the unique user login name, usually prefixed by the domain  / realm:
-     * <p>
-     * format:  'realm/user.name'
-     * <p>
+     * Gets the user identity, which must be unique in the current environment,
+     * even over multiple realms.
+     *
+     * It can be an internal id, uuid, or a natural id like email etc.
+     *
      * This is a short-hand for the generic getPrincipal()
      */
     String getSubject();
-
-
-    /**
-     * Gets the local user login name part from the subject.
-     */
-    default String getLoginName() {
-        String subject = getSubject();
-        if(subject != null){
-            String[] parts = subject.split("/");
-            return parts[parts.length-1];
-        }
-        return null;
-    }
 
     /**
      * Checks if the given Principal has the given role

@@ -36,12 +36,12 @@ public final class SecurityUtils {
     }
 
     /**
-     * Get the login of the current user.
+     * Gets the subject identity of the current logged in user.
      */
-    public static String getCurrentLogin() {
+    public static String getCurrentSubject() {
         AuthenticationDetail auth = getAuthentication();
         if(auth != null){
-            return auth.getLoginName();
+            return auth.getSubject();
         }
         return null;
     }
@@ -60,11 +60,6 @@ public final class SecurityUtils {
     public static boolean hasAuthWith(Predicate<AuthenticationDetail> authPredicate) {
         AuthenticationDetail auth = getAuthentication();
         return auth != null && authPredicate.test(auth);
-    }
-
-
-    public static boolean hasLogin(String login){
-        return Objects.equals(login, getCurrentLogin());
     }
 
 

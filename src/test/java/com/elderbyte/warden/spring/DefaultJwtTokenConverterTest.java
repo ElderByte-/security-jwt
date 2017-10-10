@@ -54,7 +54,6 @@ public class DefaultJwtTokenConverterTest {
 
        Assert.assertEquals("myRealm", authenticationDetail.getRealm());
        Assert.assertEquals("myRealm/myLogin", authenticationDetail.getSubject());
-       Assert.assertEquals("myLogin", authenticationDetail.getLoginName());
        Assert.assertEquals("myRealm/myLogin", authenticationDetail.getPrincipal());
 
        Assert.assertEquals("Firstname Lastname", authenticationDetail.getName());

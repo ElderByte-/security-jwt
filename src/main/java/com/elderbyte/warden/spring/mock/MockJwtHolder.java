@@ -140,7 +140,7 @@ public class MockJwtHolder {
         mockUser.setLogin("foo.mock");
         mockUser.setRealm("mock");
         mockUser.setFullName("Default Foo Bar");
-        mockUser.setRoles(Arrays.asList("USER").toArray(new String[0]));
+        mockUser.setRoles(Arrays.asList("USER", "MOCK").toArray(new String[0]));
 
         return mockUser;
     }

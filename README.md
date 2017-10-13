@@ -60,3 +60,18 @@ warden.client:
 ```
 
 
+## Supported JWT Claims
+
+
+| JWT Claim             |      Description                          |  Example           |
+|-----------------------|:-----------------------------------------:|-------------------:|
+| iss                   |  The issuer of this token                 | http://my.auth.com |
+| aud                   |  The intended audience                    | [master]           |
+| exp                   |  The expiration date                      | (date)             |
+| realm                 |  The security realm / tenant              | master             |
+| username              |  The user login name                      | foo.bar            |
+| sub                   |  The subject, a unique user id            | 512342314          |
+| name                  |  A display friendly name                  | Foo Bar            |
+| roles                 |  All granted security roles               | [USER, FRONT_DESK] |
+| lang                  |  Preferred user language                  | en_US              |
+

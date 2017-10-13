@@ -36,6 +36,7 @@ public class DefaultJwtTokenConverter implements JwtTokenConverter {
 
         return new AuthenticationDetailImpl(
                 getRealm(claims),
+                claims.getStringClaim("username"),
                 claims.getSubject(),
                 claims.getStringClaim("name"),
                 authorities,

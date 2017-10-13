@@ -27,6 +27,11 @@ public interface AuthenticationDetail extends Authentication {
     String getSubject();
 
     /**
+     * Gets the login name of the current user.
+     */
+    String getUserName();
+
+    /**
      * Checks if the given Principal has the given role
      * @param role The role to check
      * @return True if the given role is present in this authenticaiton

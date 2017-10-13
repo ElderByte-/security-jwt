@@ -149,6 +149,7 @@ public class MockJwtHolder {
         AuthenticationDetail auth = new AuthenticationDetailImpl(
                 mockUser.getRealm(),
                 mockUser.getLogin(),
+                mockUser.getRealm() + "-" + mockUser.getLogin(),
                 mockUser.getFullName(),
                 AuthorityUtil.createAuthorities(mockUser.getRoles()),
                 getSignedJWTMock(mockUser)

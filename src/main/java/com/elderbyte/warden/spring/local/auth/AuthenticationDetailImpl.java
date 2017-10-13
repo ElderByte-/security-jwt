@@ -20,11 +20,29 @@ public class AuthenticationDetailImpl implements AuthenticationDetail {
     private final String fullName;
     private final String subject;
     private final Object details;
+    private final String username;
 
     private boolean isAuthenticated = false;
 
-    public AuthenticationDetailImpl(String realm, String subject, String fullName, Set<? extends GrantedAuthority> authorities, Object details){
+
+    /**
+     * Creates a new AuthenticationDetail
+     * @param realm The security realm / tenant
+     * @param username The user name
+     * @param subject The unique user id
+     * @param fullName A user friendly display string
+     * @param authorities The security roles
+     * @param details Additional, untyped details
+     */
+    public AuthenticationDetailImpl(
+            String realm,
+            String username,
+            String subject,
+            String fullName,
+            Set<? extends GrantedAuthority> authorities,
+            Object details){
         this.realm = realm;
+        this.username = username;
         this.subject = subject;
         this.authorities = Collections.unmodifiableSet(authorities);
         this.roles = authorities.stream().map(a -> a.getAuthority()).collect(Collectors.toSet());
@@ -44,6 +62,11 @@ public class AuthenticationDetailImpl implements AuthenticationDetail {
     @Override
     public String getSubject() {
         return getPrincipal().toString();
+    }
+
+    @Override
+    public String getUserName() {
+        return username;
     }
 
     /**

@@ -42,6 +42,13 @@ compileJava {
     options.encoding = "UTF-8"
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Dalston.SR3"
+    }
+}
+
+
 repositories {
     mavenCentral()
     mavenLocal()
@@ -53,6 +60,9 @@ dependencies {
     // Spring boot
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("javax.servlet:javax.servlet-api")
+
+    // Spring Cloud Feign
+    compile("org.springframework.cloud:spring-cloud-starter-feign")
 
     // Utilities
     compile("com.nimbusds:nimbus-jose-jwt:4.37.1")

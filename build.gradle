@@ -5,13 +5,13 @@ buildscript {
         maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M6")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M7")
     }
 }
 
 
 plugins {
-    id "com.jfrog.bintray" version "1.7.3"
+    id "com.jfrog.bintray" version "1.8.0"
 }
 
 apply plugin: 'java'
@@ -21,7 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven-publish'
 
 
-version =  '2.0.0.E1'
+version =  '2.0.0.E2'
 group = 'com.elderbyte.warden'
 
 tasks.withType(Javadoc) {
@@ -30,13 +30,13 @@ tasks.withType(Javadoc) {
     options.addStringOption('encoding','UTF-8')
 }
 
-
-bootJar {
-    // Since this is a library, it cant be executed directly
-    enabled = false // Don't create a runnable fat jar
+jar {
+    enabled = true
 }
 
-
+bootJar {
+    enabled = false // Don't create a fat jar
+}
 
 compileJava {
     sourceCompatibility = 1.9
@@ -47,7 +47,7 @@ compileJava {
 
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.M4"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Finchley.M5"
     }
 }
 

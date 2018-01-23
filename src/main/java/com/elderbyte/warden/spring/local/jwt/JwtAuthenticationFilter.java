@@ -3,15 +3,15 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.elderbyte.warden.spring.local.auth.LocalAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * Filters each HTTP request and looks for a JWT authentication token.
@@ -21,7 +21,8 @@ import org.springframework.web.filter.GenericFilterBean;
  * handy.
  *
  */
-public class JwtAuthenticationFilter extends GenericFilterBean {
+@Order(10000)
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -37,14 +38,11 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
 
     @Override
-    public final void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-        HttpServletRequest req = (HttpServletRequest) request;
+        String stringToken = extractAuthToken(request);
 
-        String stringToken = extractAuthToken(req);
-
-        logger.trace("HTTP Request '"+((HttpServletRequest) request).getRequestURI()+"' with token: " + stringToken);
+        logger.trace("HTTP Request {} with token: {}", request.getRequestURI(), stringToken);
 
         // Check if we have an Authorization header
 
@@ -61,7 +59,6 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         chain.doFilter(request, response);
     }
-
 
 
     /**

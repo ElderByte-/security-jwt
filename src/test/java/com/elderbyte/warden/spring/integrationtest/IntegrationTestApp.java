@@ -15,7 +15,7 @@ import java.net.UnknownHostException;
 
 @EnableWebSecurity
 @RestController
-@Secured("USER")
+@Secured("ROLE_USER")
 @RequestMapping("/api")
 @SpringBootApplication
 public class IntegrationTestApp {

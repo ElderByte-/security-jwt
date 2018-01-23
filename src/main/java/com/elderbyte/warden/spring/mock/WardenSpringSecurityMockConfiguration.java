@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import javax.servlet.Filter;
+
 @Configuration
 @ConditionalOnProperty("warden.client.enableMock")
 public class WardenSpringSecurityMockConfiguration {
@@ -21,4 +23,10 @@ public class WardenSpringSecurityMockConfiguration {
     public RSAPublicKeyProvider mockRSAPublicKeyProvider(MockJwtHolder mockJwtHolder){
         return realm ->  mockJwtHolder.getMockPublicKey();
     }
+
+    @Bean
+    public Filter MockAuthenticationFilter(MockJwtHolder jwtHolder){
+        return new MockAuthenticationFilter(jwtHolder);
+    }
+
 }

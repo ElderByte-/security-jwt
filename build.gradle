@@ -21,7 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven-publish'
 
 
-version =  '2.0.0.E2'
+version =  '2.0.0.E3'
 group = 'com.elderbyte.warden'
 
 tasks.withType(Javadoc) {

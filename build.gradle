@@ -69,7 +69,7 @@ dependencies {
     compile("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     // Utilities
-    compile("com.nimbusds:nimbus-jose-jwt:4.37.1")
+    compile("com.nimbusds:nimbus-jose-jwt:5.4")
     compile("com.github.ben-manes.caffeine:caffeine")
 
     // Test dependencies

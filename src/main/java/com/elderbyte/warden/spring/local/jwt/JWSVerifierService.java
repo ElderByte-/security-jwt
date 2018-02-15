@@ -74,7 +74,7 @@ public class JWSVerifierService {
      */
     public void verifyOrThrow(SignedJWT token) throws AuthenticationException {
         String realm = getRealm(token);
-        if(realm == null) throw new IllegalArgumentException("Jwt does not contain a realm/audience claim, can't authenticate.");
+        if(realm == null) throw new JwtAuthenticationException("Jwt does not contain a realm/audience claim, can't authenticate.");
         try {
             JWSVerifier verifier = getTokenVerifier(realm);
             if (!token.verify(verifier)) {

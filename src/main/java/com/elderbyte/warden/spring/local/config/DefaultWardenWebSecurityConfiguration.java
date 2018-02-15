@@ -4,6 +4,7 @@ import com.elderbyte.warden.spring.local.auth.LocalAuthService;
 import com.elderbyte.warden.spring.local.jwt.JwtAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,7 @@ public class DefaultWardenWebSecurityConfiguration extends WebSecurityConfigurer
     }
 
     @Bean
+    @ConditionalOnProperty(value = "warden.client.enableMock", matchIfMissing = true, havingValue = "false")
     public Filter jwtAuthenticationFilter(LocalAuthService localAuthService){
         return new JwtAuthenticationFilter(localAuthService);
     }

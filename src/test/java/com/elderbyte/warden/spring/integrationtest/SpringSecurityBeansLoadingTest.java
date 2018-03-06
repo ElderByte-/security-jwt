@@ -21,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource(properties = {
         "warden.client.enableMock=false"
 })
-public class SpringContextLoadingTest {
+public class SpringSecurityBeansLoadingTest {
 
     @Autowired
     private LocalAuthService authService;

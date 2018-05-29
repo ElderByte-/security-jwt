@@ -32,7 +32,7 @@ You basically use the standard Spring security features.
 
 ```java
 // Statically import the Acw utility
-import static com.elderbyte.warden.spring.local.auth.Acw.*;
+import static com.elderbyte.security.spring.local.auth.Acw.*;
 
 
 public void mySecuredMethod(){

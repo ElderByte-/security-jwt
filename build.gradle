@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.1.RELEASE'
+        springBootVersion = '2.0.2.RELEASE'
         springCloudVersion = 'Finchley.M9'
-        nimbusJwtVersion = '5.5'
+        nimbusJwtVersion = '5.10'
     }
     repositories {
         mavenCentral()
@@ -24,8 +24,8 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven-publish'
 
-version =  '2.0.1.E5'
-group = 'com.elderbyte.warden'
+version =  '2.0.0-Sp2.0.2'
+group = 'com.elderbyte.security'
 
 tasks.withType(Javadoc) {
     // Avoid failing builds because of java-doc errors

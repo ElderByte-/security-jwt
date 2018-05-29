@@ -134,7 +134,7 @@ bintray {
         name = "${jar.baseName}"
         userOrg = 'elderbyte'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/ElderByte-/warden-spring-security-jwt'
+        vcsUrl = 'https://github.com/ElderByte-/spring-security-jwt'
 
         version {
             name = project.version //Bintray logical version name

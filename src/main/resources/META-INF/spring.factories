@@ -1,2 +1,2 @@
 # Auto configuration
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.elderbyte.warden.spring.local.WardenSpringSecurityJwtAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.elderbyte.security.spring.local.ElderSpringSecurityJwtAutoConfiguration

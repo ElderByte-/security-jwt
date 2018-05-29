@@ -1,5 +1,5 @@
 
-[ ![Download](https://api.bintray.com/packages/elderbyte/maven/warden-spring-security-jwt/images/download.svg) ](https://bintray.com/elderbyte/maven/warden-spring-security-jwt/_latestVersion) 
+[ ![Download](https://api.bintray.com/packages/elderbyte/maven/spring-security-jwt/images/download.svg) ](https://bintray.com/elderbyte/maven/spring-security-jwt/_latestVersion) 
 
 
 # Spring Security JWT integration
@@ -13,12 +13,12 @@ This project provides an out of the box working JWT integration into Spring secu
 
 ### Configuration Properties
 
-**warden.client.realm** *[string]* (optional)
+**elder.security.jwt.realm** *[string]* (optional)
 
 Define the identity name of the realm / audience. Incomming JWT tokens must have a matching realm / audience claim to be accepted. 
 
 
-**warden.client.publicKeyValue** *[string]* (required)
+**elder.security.jwt.publicKeyValue** *[string]* (required)
 
 Configure the Public Key used to verify incomming JWT Tokens. This property is required by the default `RSAPublicKeyProvider`.
 If desired, you may overwrite the `RSAPublicKeyProvider` with Spring configuration and use your own logic to retirve it.
@@ -50,7 +50,7 @@ While developing your secured Spring Application, the security can be quite an o
 If you enable mocking, the spring security context will get mocked for you:
 
 ```
-warden.client:
+elder.security.jwt:
   enableMock: true
   mockUsers:
       - realm: mycompany

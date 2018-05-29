@@ -1,10 +1,9 @@
 package com.elderbyte.security.spring.integrationtest;
 
 import com.elderbyte.security.spring.ElderSpringSecurityJwtSettings;
-import com.elderbyte.security.spring.local.auth.SecurityUtils;
+import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
 import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
-import com.elderbyte.security.spring.mock.MockJwtHolder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,36 +18,39 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = IntegrationTestApp.class)
 @TestPropertySource(properties = {
-        "elder.security.jwt.enableMock=true"
+        "warden.client.enableMock=false"
 })
-public class TestMockConfiguration {
+public class RealSpringSecurityBeansLoadingTestLegacy {
+
+    @Autowired
+    private LocalAuthService authService;
 
     @Autowired
     private ElderSpringSecurityJwtSettings settings;
 
     @Autowired
-    private MockJwtHolder mockJwtHolder;
-
-    @Autowired
     private ApplicationContext applicationContext;
 
     @Test
-    public void ensureMockEnabled(){
-        Assert.assertTrue("Mocking should be enabled in this test!", settings.isEnableMock());
+    public void contextLoads(){
+        Assert.assertTrue(authService != null);
     }
 
-    @Test
-    public void ensureMockLoaded(){
-        Assert.assertTrue("There should be a mocked authentication present!", SecurityUtils.getAuthentication() != null);
-    }
 
     @Test
-    public void ensureMockAuthenticationFilterIsPresent(){
-        Assert.assertTrue("MockAuthenticationFilter must be present when mock is enabled!", applicationContext.getBean(MockAuthenticationFilter.class) != null);
+    public void ensureMockNotEnabled(){
+        Assert.assertFalse("Mock should be disabled by default!", settings.isEnableMock());
     }
 
     @Test(expected = NoSuchBeanDefinitionException.class)
-    public void ensureStandardJwtFilterIsNotPresent(){
-        applicationContext.getBean(JwtAuthenticationFilter.class); // Expect bean to be missing
+    public void ensureMockAuthenticationFilterIsNotPresent(){
+        applicationContext.getBean(MockAuthenticationFilter.class); // Expect bean to be missing
+
+    }
+
+    @Test
+    public void ensureStandardJwtFilterIsPresent(){
+        Assert.assertNotNull("JwtAuthenticationFilter must be present when mock is enabled!",
+                applicationContext.getBean(JwtAuthenticationFilter.class));
     }
 }

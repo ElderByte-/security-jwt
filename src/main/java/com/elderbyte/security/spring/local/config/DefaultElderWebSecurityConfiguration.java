@@ -2,8 +2,11 @@ package com.elderbyte.security.spring.local.config;
 
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
+import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +33,7 @@ public class DefaultElderWebSecurityConfiguration extends WebSecurityConfigurerA
     }
 
     @Bean
-    @ConditionalOnProperty(value = "elder.security.jwt.enableMock", matchIfMissing = true, havingValue = "false")
+    @ConditionalOnExpression("${elder.security.jwt.enableMock:${warden.client.enableMock:false}}==false")
     public Filter jwtAuthenticationFilter(LocalAuthService localAuthService){
         return new JwtAuthenticationFilter(localAuthService);
     }

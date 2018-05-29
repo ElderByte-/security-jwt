@@ -2,7 +2,6 @@ package com.elderbyte.security.spring.integrationtest;
 
 import com.elderbyte.security.spring.ElderSpringSecurityJwtSettings;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
-import com.elderbyte.security.spring.local.auth.SecurityUtils;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
 import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
 import org.junit.Assert;
@@ -21,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource(properties = {
         "elder.security.jwt.enableMock=false"
 })
-public class SpringSecurityBeansLoadingTest {
+public class RealSpringSecurityBeansLoadingTest {
 
     @Autowired
     private LocalAuthService authService;
@@ -40,12 +39,7 @@ public class SpringSecurityBeansLoadingTest {
 
     @Test
     public void ensureMockNotEnabled(){
-        Assert.assertFalse("Mock should be disabled by default!",settings.isEnableMock());
-    }
-
-    @Test
-    public void ensureMockNotLoaded(){
-        Assert.assertTrue("There should be no authentication context when mock is disabled!",SecurityUtils.getAuthentication() == null);
+        Assert.assertFalse("Mock should be disabled by default!", settings.isEnableMock());
     }
 
     @Test(expected = NoSuchBeanDefinitionException.class)
@@ -56,6 +50,7 @@ public class SpringSecurityBeansLoadingTest {
 
     @Test
     public void ensureStandardJwtFilterIsPresent(){
-        Assert.assertTrue("JwtAuthenticationFilter must be present when mock is enabled!", applicationContext.getBean(JwtAuthenticationFilter.class) != null);
+        Assert.assertNotNull("JwtAuthenticationFilter must be present when mock is enabled!",
+                applicationContext.getBean(JwtAuthenticationFilter.class));
     }
 }

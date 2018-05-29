@@ -1,7 +1,7 @@
 package com.elderbyte.security.spring;
 
 import com.elderbyte.security.spring.mock.MockUser;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import java.util.Optional;
  * Holds the spring authentication configuration
  */
 @Configuration
-@ConfigurationProperties("elder.security.jwt")
 public class ElderSpringSecurityJwtSettings {
 
     /**
@@ -23,6 +22,8 @@ public class ElderSpringSecurityJwtSettings {
      * - If you use the login-proxy, this is the realm used to authenticate against
      *
      */
+    //@Value("#{${elder.security.jwt.realm:${warden.client.realm}} ?:null}")
+    @Value("${elder.security.jwt.realm:${warden.client.realm:#{null}}}")
     private String realm;
 
     /**
@@ -30,26 +31,21 @@ public class ElderSpringSecurityJwtSettings {
      * This public key must be the counterpart of the authentication server's private key used to sign the token.
      *
      */
+    @Value("${elder.security.jwt.publicKeyValue:${warden.client.publicKeyValue:#{null}}}")
     private String publicKeyValue;
 
-
+    @Value("${elder.security.jwt.enableMock:${warden.client.enableMock:false}}")
     private boolean enableMock;
+
+    @Value("${elder.security.jwt.mockUsers:${warden.client.mockUsers:#{null}}}")
     private final List<MockUser> mockUsers = new ArrayList<>();
 
     public Optional<String> getRealm() {
         return Optional.ofNullable(realm);
     }
 
-    public void setRealm(String realm) {
-        this.realm = realm;
-    }
-
     public String getPublicKeyValue() {
         return publicKeyValue;
-    }
-
-    public void setPublicKeyValue(String publicKeyValue) {
-        this.publicKeyValue = publicKeyValue;
     }
 
     public List<MockUser> getMockUsers() {
@@ -58,10 +54,6 @@ public class ElderSpringSecurityJwtSettings {
 
     public boolean isEnableMock() {
         return enableMock;
-    }
-
-    public void setEnableMock(boolean enableMock) {
-        this.enableMock = enableMock;
     }
 
 }

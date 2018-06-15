@@ -5,6 +5,7 @@ import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
 import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,6 +27,14 @@ public class DefaultElderWebSecurityConfiguration extends WebSecurityConfigurerA
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * X-Frame-Options is a HTTP header response to prevent clickjacking.
+     *
+     * see https://developer.mozilla.org/de/docs/Web/HTTP/Headers/X-Frame-Options
+     */
+    @Value("${elder.security.web.xframeoptions:}")
+    private String xFrameOptions;
+
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -44,6 +53,13 @@ public class DefaultElderWebSecurityConfiguration extends WebSecurityConfigurerA
         logger.info("Configuring Elder Web Security...");
 
         http.csrf().disable(); // Since JWTs are stored in local browser storage (if at all), we are not vulnerable to CSRF
+
+        // For cases like usage of Iframes, we want to be able to configure X-Frame-Options.
+        if (xFrameOptions.toLowerCase().equals("disable")){
+            http.headers().frameOptions().disable();
+        } else if (xFrameOptions.toLowerCase().equals("same_origin")) {
+            http.headers().frameOptions().sameOrigin();
+        }
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

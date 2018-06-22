@@ -63,27 +63,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     /**
      * Extract the auth token from the request.
-     * Support Authorization headers and ?jwt parameter
+     * Support Authorization headers and ?access_token or ?jwt parameter
      * @param request The servlet request from which a token should be extracted
      * @return Returns the found token or null if no token could be found.
      */
     protected String extractAuthToken(HttpServletRequest request){
 
-        String stringToken = request.getHeader("Authorization");
-        if(stringToken == null || stringToken.isEmpty()){
-            // No Authorization Header was found. Maybe a simple url parameter was used
-            stringToken = request.getParameter("jwt");
-        }
+        String jwtToken = null;
 
-        if(stringToken != null){
-            // Clean the JWT token
+        // Get the auth header with the bearer token
+        String bearerToken = request.getHeader("Authorization");
+
+        if(bearerToken != null && !bearerToken.isEmpty()){
+            // Clean the bearer token
             // Remove the prefixes such as 'Bearer'
+            String[] parts = bearerToken.split(" ");
+            jwtToken = parts[parts.length-1].trim(); // Just interpret the last part as JWT token
 
-            String[] parts = stringToken.split(" ");
-            stringToken = parts[parts.length-1].trim(); // Just interpret the last part as JWT token
         }
 
-        return stringToken;
+        if(jwtToken == null){
+            // No jwt token was extracted from the header
+
+            // Fall back to query params: access_token or jwt:
+            jwtToken = request.getParameter("access_token");
+
+            if(jwtToken == null || jwtToken.isEmpty()) {
+                jwtToken = request.getParameter("jwt");
+            }
+        }
+
+        return jwtToken;
     }
 
 }

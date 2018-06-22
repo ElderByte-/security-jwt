@@ -2,7 +2,7 @@ buildscript {
     ext {
         springBootVersion = '2.0.2.RELEASE'
         springCloudVersion = 'Finchley.M9'
-        nimbusJwtVersion = '5.10'
+        nimbusJwtVersion = '5.12'
     }
     repositories {
         mavenCentral()

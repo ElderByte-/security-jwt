@@ -3,3 +3,10 @@ spring:
     web-application-type: SERVLET
 
 logging.level.com.elderbyte: TRACE
+
+elder.security.jwt:
+  mockUsers:
+  - realm: mock-realm
+    login: mock-login
+    fullName: Mock Login
+    roles: USER, MOCK

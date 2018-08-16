@@ -38,6 +38,19 @@ public class MockSpringSecurityBeansLoadingTest {
     }
 
     @Test
+    public void ensureConfiguredMockUser(){
+
+        Assert.assertEquals(1, settings.getMockUsers().size());
+
+        var mockUser = settings.getMockUsers().get(0);
+
+        Assert.assertEquals("mock-login", mockUser.getLogin());
+        Assert.assertEquals("mock-realm", mockUser.getRealm());
+        Assert.assertEquals("Mock Login", mockUser.getFullName());
+        Assert.assertArrayEquals("Actual roles: " +  String.join(",", mockUser.getRoles()), new String[] { "USER", "MOCK" }, mockUser.getRoles());
+    }
+
+    @Test
     public void ensureMockLoaded(){
         Assert.assertNotNull("There should be a mocked authentication present!",
                 SecurityUtils.getAuthentication());

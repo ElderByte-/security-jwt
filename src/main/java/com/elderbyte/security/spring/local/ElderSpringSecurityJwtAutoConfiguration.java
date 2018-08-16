@@ -1,6 +1,7 @@
 package com.elderbyte.security.spring.local;
 
 import com.elderbyte.security.spring.ElderSpringSecurityJwtSettings;
+import com.elderbyte.security.spring.ElderSpringSecurityJwtSettingsConfig;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.config.AccessDeniedExceptionHandler;
 import com.elderbyte.security.spring.local.config.DefaultElderSecurityConfig;
@@ -25,7 +26,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 @EnableConfigurationProperties
 @Import({
         ElderSpringSecurityMockConfiguration.class,
-        ElderSpringSecurityJwtSettings.class,
+
+        ElderSpringSecurityJwtSettingsConfig.class,
         AccessDeniedExceptionHandler.class,
         DefaultElderSecurityConfig.class,
         DefaultFeignSecurityConfiguration.class

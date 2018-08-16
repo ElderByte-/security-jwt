@@ -1,7 +1,9 @@
 package com.elderbyte.security.spring;
 
 import com.elderbyte.security.spring.mock.MockUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -11,49 +13,48 @@ import java.util.Optional;
 /**
  * Holds the spring authentication configuration
  */
-@Configuration
 public class ElderSpringSecurityJwtSettings {
 
-    /**
-     * The realm of this client.
-     *
-     * - Incoming JWT tokens need to have this realm to be accepted
-     * - May be null to omit realm check
-     * - If you use the login-proxy, this is the realm used to authenticate against
-     *
-     */
-    //@Value("#{${elder.security.jwt.realm:${warden.client.realm}} ?:null}")
-    @Value("${elder.security.jwt.realm:${warden.client.realm:#{null}}}")
-    private String realm;
+    private final ElderSpringSecurityJwtProperties elderSpringSecurityJwtProperties;
+    private final LegacySpringSecurityJwtProperties legacySpringSecurityJwtProperties;
 
-    /**
-     * The public RSA key which is used to verify JWT tokens.
-     * This public key must be the counterpart of the authentication server's private key used to sign the token.
-     *
-     */
-    @Value("${elder.security.jwt.publicKeyValue:${warden.client.publicKeyValue:#{null}}}")
-    private String publicKeyValue;
-
-    @Value("${elder.security.jwt.enableMock:${warden.client.enableMock:false}}")
-    private boolean enableMock;
-
-    @Value("${elder.security.jwt.mockUsers:${warden.client.mockUsers:#{null}}}")
-    private final List<MockUser> mockUsers = new ArrayList<>();
+    public ElderSpringSecurityJwtSettings(
+            ElderSpringSecurityJwtProperties elderSpringSecurityJwtProperties,
+            LegacySpringSecurityJwtProperties legacySpringSecurityJwtProperties
+            ){
+        this.elderSpringSecurityJwtProperties = elderSpringSecurityJwtProperties;
+        this.legacySpringSecurityJwtProperties = legacySpringSecurityJwtProperties;
+    }
 
     public Optional<String> getRealm() {
-        return Optional.ofNullable(realm);
+
+        var realm = Optional.ofNullable(elderSpringSecurityJwtProperties.getRealm());
+
+        if(realm.isPresent()){
+            return realm;
+        }else {
+            return Optional.ofNullable(legacySpringSecurityJwtProperties.getRealm());
+        }
     }
 
     public String getPublicKeyValue() {
-        return publicKeyValue;
+        var pubkey = elderSpringSecurityJwtProperties.getPublicKeyValue();
+        if(pubkey == null){
+            return legacySpringSecurityJwtProperties.getPublicKeyValue();
+        }else{
+            return pubkey;
+        }
     }
 
     public List<MockUser> getMockUsers() {
-        return mockUsers;
+        if(elderSpringSecurityJwtProperties.isEnableMock()){
+            return elderSpringSecurityJwtProperties.getMockUsers();
+        }
+        return legacySpringSecurityJwtProperties.getMockUsers();
     }
 
     public boolean isEnableMock() {
-        return enableMock;
+        return elderSpringSecurityJwtProperties.isEnableMock() || legacySpringSecurityJwtProperties.isEnableMock();
     }
 
 }

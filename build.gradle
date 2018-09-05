@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.2.RELEASE'
-        springCloudVersion = 'Finchley.M9'
-        nimbusJwtVersion = '5.12'
+        springBootVersion = '2.0.4.RELEASE'
+        springCloudVersion = 'Finchley.SR1'
+        nimbusJwtVersion = '6.0.1'
     }
     repositories {
         mavenCentral()
@@ -24,7 +24,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven-publish'
 
-version =  '2.3.0-Sp2.0.2'
+version =  '2.3.0-Sp2.0.4'
 group = 'com.elderbyte.security'
 
 tasks.withType(Javadoc) {

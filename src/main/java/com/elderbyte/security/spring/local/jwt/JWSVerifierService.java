@@ -54,8 +54,8 @@ public class JWSVerifierService {
 
         verifierCache = Caffeine.newBuilder()
                 .maximumSize(100)
-                .refreshAfterWrite(5, TimeUnit.MINUTES)
-                .expireAfterAccess(10, TimeUnit.MINUTES)
+                .refreshAfterWrite(4, TimeUnit.MINUTES)
+                .expireAfterAccess(5, TimeUnit.MINUTES)
                 .build(realm -> buildJWSVerifier(realm));
     }
 
@@ -76,6 +76,7 @@ public class JWSVerifierService {
         try {
             JWSVerifier verifier = getTokenVerifier(realm);
             if (!token.verify(verifier)) {
+                verifierCache.refresh(realm);
                 throw new JwtAuthenticationException("Authentication failed - MAC/RSA signature not matching!");
             }
         } catch (JOSEException e) {

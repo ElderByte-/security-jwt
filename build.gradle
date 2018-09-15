@@ -1,144 +1,48 @@
 buildscript {
-    ext {
-        springBootVersion = '2.0.4.RELEASE'
-        springCloudVersion = 'Finchley.SR1'
-        nimbusJwtVersion = '6.0.1'
-    }
     repositories {
+        jcenter()
         mavenCentral()
-        maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4")
     }
 }
 
+allprojects {
+    version =  '2.3.1'
+    group = 'com.elderbyte.security'
 
-plugins {
-    id "com.jfrog.bintray" version "1.8.0"
-}
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'maven-publish'
-
-version =  '2.3.1-Sp2.0.4'
-group = 'com.elderbyte.security'
-
-tasks.withType(Javadoc) {
-    // Avoid failing builds because of java-doc errors
-    options.addStringOption('Xdoclint:none', '-quiet')
-    options.addStringOption('encoding','UTF-8')
-}
-
-jar {
-    enabled = true
-}
-
-bootJar {
-    enabled = false // Don't create a fat jar
-}
-
-
-compileJava {
-    sourceCompatibility = 10
-    targetCompatibility = 10
-
-    options.encoding = "UTF-8"
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    tasks.withType(Javadoc) {
+        // Avoid failing builds because of java-doc errors
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding','UTF-8')
     }
 }
 
+subprojects {
+    ext {
+        springBootVersionBase = '2.0.4'
+        springBootVersion = '2.0.4.RELEASE'
+        springCloudVersion = 'Finchley.SR1'
 
-repositories {
-    mavenCentral()
-    maven { url "https://repo.spring.io/milestone" }
-    maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
-}
+        nimbusJwtVersion = '6.0.1'
+        //feignOkHttpVersion = '9.5.0'
 
-dependencies {
+        bintrayVersion = '1.8.4'
+    }
 
-    // Spring boot
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("javax.servlet:javax.servlet-api")
-
-    // Spring Cloud Feign
-    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
-
-    // Utilities
-    compile("com.nimbusds:nimbus-jose-jwt:${nimbusJwtVersion}")
-    compile("com.github.ben-manes.caffeine:caffeine")
-
-    // Test dependencies
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.boot:spring-boot-starter-web") // Add web support for testing auth filters
-    testCompile("junit:junit")
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task upload {
-    dependsOn bintrayUpload
+    tasks.withType(Javadoc) {
+        // Avoid failing builds because of java-doc errors
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding','UTF-8')
+    }
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.10'
 }
 
-// Publishing
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-
-            groupId = project.group
-            artifactId = jar.baseName
-
-            artifact sourcesJar
-            artifact javadocJar
-        }
-    }
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
-}
 
 
 
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-    publications = ['mavenJava']
-
-    dryRun = false //Whether to run this as dry-run, without deploying
-    publish = true //If version should be auto published after an upload
-
-    pkg {
-        repo = 'maven'
-        name = "${jar.baseName}"
-        userOrg = 'elderbyte'
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/ElderByte-/spring-security-jwt'
-
-        version {
-            name = project.version //Bintray logical version name
-        }
-    }
-}
 

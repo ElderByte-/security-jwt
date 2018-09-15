@@ -1,9 +1,0 @@
-com.elderbyte.security.spring
-com.elderbyte.security.spring.local
-com.elderbyte.security.spring.local.auth
-com.elderbyte.security.spring.local.config
-com.elderbyte.security.spring.local.feign
-com.elderbyte.security.spring.local.feign.interceptors
-com.elderbyte.security.spring.local.jwt
-com.elderbyte.security.spring.mock
-com.elderbyte.security.spring.rsa

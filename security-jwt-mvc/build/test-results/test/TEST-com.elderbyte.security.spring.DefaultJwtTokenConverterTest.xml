@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.elderbyte.security.spring.DefaultJwtTokenConverterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-09-15T10:09:06" hostname="elderbook-pbu.lan" time="0.106">
-  <properties/>
-  <testcase name="testConvert" classname="com.elderbyte.security.spring.DefaultJwtTokenConverterTest" time="0.106"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

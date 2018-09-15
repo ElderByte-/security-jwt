@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.elderbyte.security.spring.AcwTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-09-15T10:09:06" hostname="elderbook-pbu.lan" time="0.005">
+  <properties/>
+  <testcase name="testBasicLogicAnd" classname="com.elderbyte.security.spring.AcwTest" time="0.002"/>
+  <testcase name="testBasic" classname="com.elderbyte.security.spring.AcwTest" time="0.0"/>
+  <testcase name="testBasicLogicOr" classname="com.elderbyte.security.spring.AcwTest" time="0.001"/>
+  <testcase name="testDenyAndGrant" classname="com.elderbyte.security.spring.AcwTest" time="0.0"/>
+  <testcase name="testBasicEnforceTrue" classname="com.elderbyte.security.spring.AcwTest" time="0.0"/>
+  <testcase name="testComplex1" classname="com.elderbyte.security.spring.AcwTest" time="0.001"/>
+  <testcase name="testComplex2" classname="com.elderbyte.security.spring.AcwTest" time="0.0"/>
+  <testcase name="testBasicEnforceFalse" classname="com.elderbyte.security.spring.AcwTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

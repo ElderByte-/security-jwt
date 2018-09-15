@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class com.elderbyte.security.spring.integrationtest.MockSpringSecurityBeansLoadingTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class com.elderbyte.security.spring.integrationtest.MockSpringSecurityBeansLoadingTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.elderbyte.security.spring.integrationtest.html">com.elderbyte.security.spring.integrationtest</a> &gt; MockSpringSecurityBeansLoadingTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">5</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.012s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">ensureConfiguredMockUser</td>
+<td>0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ensureMockAuthenticationFilterIsPresent</td>
+<td>0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ensureMockEnabled</td>
+<td>0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ensureMockLoaded</td>
+<td>0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">ensureStandardJwtFilterIsNotPresent</td>
+<td>0.003s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2018-09-15 12:09:10.423  INFO 26986 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.elderbyte.security.spring.integrationtest.MockSpringSecurityBeansLoadingTest], using SpringBootContextLoader
+2018-09-15 12:09:10.424  INFO 26986 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.elderbyte.security.spring.integrationtest.MockSpringSecurityBeansLoadingTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2018-09-15 12:09:10.430  INFO 26986 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-09-15 12:09:10.431  INFO 26986 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2f0440da, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b78749b, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3b600ab6, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@2ce89558, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2167028f, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@29336694, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@123decbe, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@7a17f9f4, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@63fdff43, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5148226e]
+2018-09-15 12:09:10.458  INFO 26986 --- [    Test worker] s.c.a.AnnotationConfigApplicationContext : Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@758be8d0: startup date [Sat Sep 15 12:09:10 CEST 2018]; root of context hierarchy
+2018-09-15 12:09:10.486  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$d3ee601b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.0.4.RELEASE)
+
+2018-09-15 12:09:10.539  INFO 26986 --- [    Test worker] s.s.i.MockSpringSecurityBeansLoadingTest : No active profile set, falling back to default profiles: default
+2018-09-15 12:09:10.543  INFO 26986 --- [    Test worker] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@3ca03708: startup date [Sat Sep 15 12:09:10 CEST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@758be8d0
+2018-09-15 12:09:10.729  INFO 26986 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=d5167632-8e89-334a-bcd4-10e75d5815d6
+2018-09-15 12:09:10.779  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$50822558] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-15 12:09:10.782  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-15 12:09:10.783  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@657fcd0f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-15 12:09:10.788  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$7556c80a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-15 12:09:10.790  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-15 12:09:10.795  INFO 26986 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$d3ee601b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-09-15 12:09:10.914  INFO 26986 --- [    Test worker] yConfig$$EnhancerBySpringCGLIB$$fef7cfdb : Configuring default elder global method security...
+2018-09-15 12:09:10.998  WARN 26986 --- [    Test worker] c.e.security.spring.mock.MockJwtHolder   : SecurityContextHolder populated with mock authentication. For development purposes only!
+2018-09-15 12:09:11.008  INFO 26986 --- [    Test worker] uration$$EnhancerBySpringCGLIB$$ef18d45b : Configuring Elder Web Security...
+2018-09-15 12:09:11.044  INFO 26986 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c702bf8, org.springframework.security.web.context.SecurityContextPersistenceFilter@7190f3f4, org.springframework.security.web.header.HeaderWriterFilter@d2df569, org.springframework.security.web.authentication.logout.LogoutFilter@a89660e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@72a0b635, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@104493b5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b962b5d, org.springframework.security.web.session.SessionManagementFilter@3932883, org.springframework.security.web.access.ExceptionTranslationFilter@1eb3a00b]
+2018-09-15 12:09:11.153  WARN 26986 --- [    Test worker] o.s.c.n.a.ArchaiusAutoConfiguration      : Netflix ConfigurationManager has already been installed, unable to re-install
+2018-09-15 12:09:11.197  INFO 26986 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-15 12:09:11.262  INFO 26986 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@3ca03708: startup date [Sat Sep 15 12:09:10 CEST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@758be8d0
+2018-09-15 12:09:11.277  INFO 26986 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/api],methods=[GET]}&quot; onto public java.lang.String com.elderbyte.security.spring.integrationtest.IntegrationTestApp.test()
+2018-09-15 12:09:11.279  INFO 26986 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error]}&quot; onto public org.springframework.http.ResponseEntity&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt; org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-09-15 12:09:11.280  INFO 26986 --- [    Test worker] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped &quot;{[/error],produces=[text/html]}&quot; onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-09-15 12:09:11.301  INFO 26986 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-15 12:09:11.301  INFO 26986 --- [    Test worker] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-09-15 12:09:11.309  INFO 26986 --- [    Test worker] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in com.elderbyte.security.spring.local.config.AccessDeniedExceptionHandler
+2018-09-15 12:09:11.484  INFO 26986 --- [    Test worker] s.s.i.MockSpringSecurityBeansLoadingTest : Started MockSpringSecurityBeansLoadingTest in 1.051 seconds (JVM running for 5.225)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 4.6</a> at 15 Sep 2018, 12:09:15</p>
+</div>
+</div>
+</body>
+</html>

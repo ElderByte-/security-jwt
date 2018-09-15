@@ -1,2 +1,3 @@
 include 'security-jwt'
 include 'security-jwt-mvc'
+include 'security-jwt-webflux'

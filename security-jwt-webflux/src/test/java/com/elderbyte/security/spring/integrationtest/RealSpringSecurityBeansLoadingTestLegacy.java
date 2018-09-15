@@ -1,8 +1,9 @@
 package com.elderbyte.security.spring.integrationtest;
 
+import com.elderbyte.security.ElderSecurityJwtSettings;
 import com.elderbyte.security.spring.settings.ElderSecurityJwtSettingsFallback;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
-import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
+import com.elderbyte.security.spring.local.jwt.JwtAuthenticationReactiveWebFilter;
 import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class RealSpringSecurityBeansLoadingTestLegacy {
     private LocalAuthService authService;
 
     @Autowired
-    private ElderSecurityJwtSettingsFallback settings;
+    private ElderSecurityJwtSettings settings;
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -50,7 +51,7 @@ public class RealSpringSecurityBeansLoadingTestLegacy {
 
     @Test
     public void ensureStandardJwtFilterIsPresent(){
-        Assert.assertNotNull("JwtAuthenticationFilter must be present when mock is enabled!",
-                applicationContext.getBean(JwtAuthenticationFilter.class));
+        Assert.assertNotNull("JwtAuthenticationReactiveWebFilter must be present when mock is enabled!",
+                applicationContext.getBean(JwtAuthenticationReactiveWebFilter.class));
     }
 }

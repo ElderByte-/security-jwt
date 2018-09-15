@@ -1,14 +1,9 @@
-package com.elderbyte.security.spring.local;
+package com.elderbyte.security.spring;
 
-import com.elderbyte.security.spring.settings.ElderSecurityJwtSettingsFallback;
+import com.elderbyte.security.ElderSecurityJwtSettings;
 import com.elderbyte.security.spring.settings.ElderSpringSecurityJwtSettingsConfig;
-import com.elderbyte.security.spring.local.auth.LocalAuthService;
-import com.elderbyte.security.spring.local.config.AccessDeniedExceptionHandler;
-import com.elderbyte.security.spring.local.config.DefaultElderSecurityConfig;
-import com.elderbyte.security.spring.local.auth.RestAuthenticationEntryPoint;
 import com.elderbyte.security.spring.local.feign.DefaultFeignSecurityConfiguration;
 import com.elderbyte.security.spring.local.jwt.*;
-import com.elderbyte.security.spring.mock.ElderSpringSecurityMockConfiguration;
 import com.elderbyte.security.rsa.PropertyRSAPublicKeyProvider;
 import com.elderbyte.security.rsa.RSAPublicKeyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,32 +15,21 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableConfigurationProperties
 @Import({
-        ElderSpringSecurityMockConfiguration.class,
-
         ElderSpringSecurityJwtSettingsConfig.class,
-        AccessDeniedExceptionHandler.class,
-        DefaultElderSecurityConfig.class,
         DefaultFeignSecurityConfiguration.class
 })
 public class ElderSpringSecurityJwtAutoConfiguration {
 
     @Autowired
-    private ElderSecurityJwtSettingsFallback clientSettings;
+    private ElderSecurityJwtSettings clientSettings;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean(AuthenticationEntryPoint.class)
-    public AuthenticationEntryPoint authenticationEntryPoint(){
-        return new RestAuthenticationEntryPoint();
     }
 
     @Bean
@@ -57,11 +41,6 @@ public class ElderSpringSecurityJwtAutoConfiguration {
     @ConditionalOnMissingBean(JwtTokenConverter.class)
     public JwtTokenConverter tokenConverter(){
         return new DefaultJwtTokenConverter();
-    }
-    
-    @Bean
-    public LocalAuthService LocalAuthService() {
-        return new LocalAuthService();
     }
 
     @Bean

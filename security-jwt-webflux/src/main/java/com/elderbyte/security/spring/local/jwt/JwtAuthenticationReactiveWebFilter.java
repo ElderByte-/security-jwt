@@ -1,5 +1,4 @@
 package com.elderbyte.security.spring.local.jwt;
-import java.io.IOException;
 
 
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
@@ -23,7 +22,7 @@ import reactor.core.publisher.Mono;
  *
  */
 @Order(10000)
-public class JwtAuthenticationFilter implements WebFilter {
+public class JwtAuthenticationReactiveWebFilter implements WebFilter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -31,7 +30,7 @@ public class JwtAuthenticationFilter implements WebFilter {
     private LocalAuthService localAuthService;
 
     @Autowired
-    public JwtAuthenticationFilter(LocalAuthService localAuthService){
+    public JwtAuthenticationReactiveWebFilter(LocalAuthService localAuthService){
         logger.info("Setting up webflux security.");
     }
 

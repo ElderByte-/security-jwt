@@ -1,5 +1,6 @@
 package com.elderbyte.security.spring.integrationtest;
 
+import com.elderbyte.security.ElderSecurityJwtSettings;
 import com.elderbyte.security.spring.settings.ElderSecurityJwtSettingsFallback;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
@@ -26,7 +27,7 @@ public class RealSpringSecurityBeansLoadingTestLegacy {
     private LocalAuthService authService;
 
     @Autowired
-    private ElderSecurityJwtSettingsFallback settings;
+    private ElderSecurityJwtSettings settings;
 
     @Autowired
     private ApplicationContext applicationContext;

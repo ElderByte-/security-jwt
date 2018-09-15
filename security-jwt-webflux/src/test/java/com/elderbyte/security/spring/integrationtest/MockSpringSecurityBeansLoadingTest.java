@@ -1,8 +1,9 @@
 package com.elderbyte.security.spring.integrationtest;
 
+import com.elderbyte.security.ElderSecurityJwtSettings;
+import com.elderbyte.security.spring.local.jwt.JwtAuthenticationReactiveWebFilter;
 import com.elderbyte.security.spring.settings.ElderSecurityJwtSettingsFallback;
 import com.elderbyte.security.spring.local.auth.SecurityUtils;
-import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
 import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
 import com.elderbyte.security.mock.MockJwtHolder;
 import org.junit.Assert;
@@ -24,7 +25,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class MockSpringSecurityBeansLoadingTest {
 
     @Autowired
-    private ElderSecurityJwtSettingsFallback settings;
+    private ElderSecurityJwtSettings settings;
 
     @Autowired
     private MockJwtHolder mockJwtHolder;
@@ -64,7 +65,7 @@ public class MockSpringSecurityBeansLoadingTest {
 
     @Test(expected = NoSuchBeanDefinitionException.class)
     public void ensureStandardJwtFilterIsNotPresent(){
-        applicationContext.getBean(JwtAuthenticationFilter.class); // Expect bean to be missing
+        applicationContext.getBean(JwtAuthenticationReactiveWebFilter.class); // Expect bean to be missing
     }
 
 }

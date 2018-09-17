@@ -59,7 +59,6 @@ dependencies {
 
     // Spring boot
     compile("org.springframework.boot:spring-boot-starter-security")
-
     compile("io.projectreactor:reactor-core")
 
     // Spring Cloud Feign
@@ -71,7 +70,7 @@ dependencies {
 
     // Test dependencies
     testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.springframework.boot:spring-boot-starter-webflux") // Add web support for testing auth filters
+    testCompile("org.springframework.boot:spring-boot-starter-webflux") // Add webflux support for testing auth filters
     testCompile("junit:junit")
 }
 

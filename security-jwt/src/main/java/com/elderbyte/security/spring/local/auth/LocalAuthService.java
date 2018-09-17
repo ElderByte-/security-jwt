@@ -24,11 +24,8 @@ public class LocalAuthService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenConverter tokenConverter;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenConverter tokenConverter;
 
 
     /***************************************************************************
@@ -37,6 +34,11 @@ public class LocalAuthService {
      *                                                                         *
      **************************************************************************/
 
+    @Autowired
+    public LocalAuthService(AuthenticationManager authenticationManager, JwtTokenConverter tokenConverter){
+        this.authenticationManager = authenticationManager;
+        this.tokenConverter = tokenConverter;
+    }
 
     /***************************************************************************
      *                                                                         *

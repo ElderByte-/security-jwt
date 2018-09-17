@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @Order(100) // Give this controller advice a quite high order so it applies before any generic handlers
 @ControllerAdvice
-public class AccessDeniedExceptionHandler {
+public class MvcSecurityExceptionHandler {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

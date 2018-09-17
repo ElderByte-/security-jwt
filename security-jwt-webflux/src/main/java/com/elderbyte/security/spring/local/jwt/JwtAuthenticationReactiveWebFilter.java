@@ -27,11 +27,12 @@ public class JwtAuthenticationReactiveWebFilter implements WebFilter {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    private LocalAuthService localAuthService;
+    private final LocalAuthService localAuthService;
 
     @Autowired
     public JwtAuthenticationReactiveWebFilter(LocalAuthService localAuthService){
         logger.info("Setting up webflux security.");
+        this.localAuthService = localAuthService;
     }
 
     @Override

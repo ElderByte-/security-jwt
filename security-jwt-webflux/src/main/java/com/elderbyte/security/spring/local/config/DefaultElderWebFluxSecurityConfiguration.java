@@ -1,6 +1,5 @@
 package com.elderbyte.security.spring.local.config;
 
-import com.elderbyte.security.spring.local.auth.AuthenticationManagerSimple;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationReactiveWebFilter;
 import org.slf4j.Logger;
@@ -9,10 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ReactiveAuthenticationManager;
-import org.springframework.security.authentication.ReactiveAuthenticationManagerAdapter;
-import org.springframework.security.config.BeanIds;
+import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -22,7 +18,7 @@ import org.springframework.web.server.WebFilter;
 
 @Configuration
 @EnableWebFluxSecurity
-public class DefaultElderWebSecurityConfiguration {
+public class DefaultElderWebFluxSecurityConfiguration {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -35,10 +31,6 @@ public class DefaultElderWebSecurityConfiguration {
     private String xFrameOptions;
 
 
-    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-    public AuthenticationManager authenticationManager(){
-        return new AuthenticationManagerSimple();
-    }
 
     @Bean
     public ReactiveAuthenticationManager reactiveAuthenticationManager(AuthenticationManager authenticationManager) {
@@ -51,31 +43,15 @@ public class DefaultElderWebSecurityConfiguration {
         return new JwtAuthenticationReactiveWebFilter(localAuthService);
     }
 
-    /*
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        logger.info("Configuring Elder Web Security...");
-
-        http.csrf().disable(); // Since JWTs are stored in local browser storage (if at all), we are not vulnerable to CSRF
-
-        // For cases like usage of Iframes, we want to be able to configure X-Frame-Options.
-        if (xFrameOptions.toLowerCase().equals("disable")){
-            http.headers().frameOptions().disable();
-        } else if (xFrameOptions.toLowerCase().equals("same_origin")) {
-            http.headers().frameOptions().sameOrigin();
-        }
-
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    }*/
-
     @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ReactiveAuthenticationManager authenticationManager) {
 
         http.httpBasic().disable();
         http.formLogin().disable();
 
         http.csrf().disable();
+
+        http.authenticationManager(authenticationManager);
 
         // For cases like usage of Iframes, we want to be able to configure X-Frame-Options.
         if (xFrameOptions.toLowerCase().equals("disable")){
@@ -84,16 +60,6 @@ public class DefaultElderWebSecurityConfiguration {
             http.headers().frameOptions()
                     .mode(XFrameOptionsServerHttpHeadersWriter.Mode.SAMEORIGIN);
         }
-
-
-        /*
-        http
-                .authorizeExchange()
-                .anyExchange().authenticated()
-                .and()
-                .httpBasic().and()
-                .formLogin();
-        */
 
         return http.build();
     }

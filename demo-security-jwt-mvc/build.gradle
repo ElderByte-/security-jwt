@@ -44,10 +44,11 @@ repositories {
 
 dependencies {
 
-    compile project(":security-jwt-webflux")
+    compile project(":security-jwt-mvc")
 
     // Spring boot
-    compile("org.springframework.boot:spring-boot-starter-webflux")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-web")
 
     // Spring Cloud Feign
     compile("org.springframework.cloud:spring-cloud-starter-openfeign")

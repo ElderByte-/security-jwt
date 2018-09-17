@@ -23,7 +23,7 @@ import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
-public class DefaultElderWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class DefaultElderWebMvcSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -35,11 +35,6 @@ public class DefaultElderWebSecurityConfiguration extends WebSecurityConfigurerA
     @Value("${elder.security.web.xframeoptions:}")
     private String xFrameOptions;
 
-    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
 
     @Bean
     @ConditionalOnExpression("${elder.security.jwt.enableMock:${warden.client.enableMock:false}}==false")

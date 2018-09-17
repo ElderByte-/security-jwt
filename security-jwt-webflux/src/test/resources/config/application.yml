@@ -1,6 +1,6 @@
 spring:
   main:
-    web-application-type: SERVLET
+    web-application-type: REACTIVE
 
 logging.level.com.elderbyte: TRACE
 

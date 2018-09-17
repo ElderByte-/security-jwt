@@ -9,11 +9,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Import({DefaultElderWebMvcSecurityConfiguration.class})
-public class DefaultElderSecurityConfig {
+public class DefaultElderMvcSecurityConfig {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public DefaultElderSecurityConfig(){
+    public DefaultElderMvcSecurityConfig(){
         logger.info("Configuring default elder global method security...");
     }
 }

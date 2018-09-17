@@ -12,11 +12,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
         DefaultElderWebFluxSecurityConfiguration.class,
         WebfluxSecurityExceptionHandler.class
 })
-public class DefaultElderSecurityConfig {
+public class DefaultElderWebfluxSecurityConfig {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public DefaultElderSecurityConfig(){
+    public DefaultElderWebfluxSecurityConfig(){
         logger.info("Configuring default elder global method security...");
     }
 }

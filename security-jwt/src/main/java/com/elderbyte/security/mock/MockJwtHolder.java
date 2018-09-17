@@ -1,7 +1,6 @@
 package com.elderbyte.security.mock;
 
 import com.elderbyte.security.ElderSecurityJwtSettings;
-import com.elderbyte.security.mock.MockUser;
 import com.elderbyte.security.spring.local.auth.AuthenticationDetail;
 import com.elderbyte.security.spring.local.auth.AuthenticationDetailImpl;
 import com.elderbyte.security.spring.local.auth.AuthorityUtil;

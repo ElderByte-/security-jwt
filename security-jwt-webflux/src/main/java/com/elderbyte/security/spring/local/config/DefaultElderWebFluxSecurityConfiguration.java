@@ -1,5 +1,6 @@
 package com.elderbyte.security.spring.local.config;
 
+import com.elderbyte.security.spring.conditions.SecurityMockDisabledCondition;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationReactiveWebFilter;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -38,7 +40,7 @@ public class DefaultElderWebFluxSecurityConfiguration {
     }
 
     @Bean
-    @ConditionalOnExpression("${elder.security.jwt.enableMock:${warden.client.enableMock:false}}==false")
+    @Conditional(SecurityMockDisabledCondition.class)
     public WebFilter jwtAuthenticationFilter(LocalAuthService localAuthService){
         return new JwtAuthenticationReactiveWebFilter(localAuthService);
     }

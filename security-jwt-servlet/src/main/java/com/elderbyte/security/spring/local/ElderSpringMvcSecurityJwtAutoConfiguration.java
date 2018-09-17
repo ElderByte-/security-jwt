@@ -1,6 +1,6 @@
 package com.elderbyte.security.spring.local;
 
-import com.elderbyte.security.spring.ServletWebApplicationCondition;
+import com.elderbyte.security.spring.conditions.ServletWebApplicationCondition;
 import com.elderbyte.security.spring.local.config.MvcSecurityExceptionHandler;
 import com.elderbyte.security.spring.local.config.DefaultElderMvcSecurityConfig;
 import com.elderbyte.security.spring.local.auth.RestAuthenticationEntryPoint;

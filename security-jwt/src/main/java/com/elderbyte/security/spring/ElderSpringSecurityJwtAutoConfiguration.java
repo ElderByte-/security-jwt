@@ -2,6 +2,7 @@ package com.elderbyte.security.spring;
 
 import com.elderbyte.security.ElderSecurityJwtSettings;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
+import com.elderbyte.security.spring.mock.ElderSecurityMockConfiguration;
 import com.elderbyte.security.spring.settings.ElderSpringSecurityJwtSettingsConfig;
 import com.elderbyte.security.spring.local.feign.DefaultFeignSecurityConfiguration;
 import com.elderbyte.security.spring.local.jwt.*;
@@ -26,7 +27,8 @@ import java.util.Collections;
 @EnableConfigurationProperties
 @Import({
         ElderSpringSecurityJwtSettingsConfig.class,
-        DefaultFeignSecurityConfiguration.class
+        DefaultFeignSecurityConfiguration.class,
+        ElderSecurityMockConfiguration.class
 })
 public class ElderSpringSecurityJwtAutoConfiguration {
 

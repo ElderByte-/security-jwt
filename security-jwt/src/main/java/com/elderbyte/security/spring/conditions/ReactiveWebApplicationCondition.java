@@ -1,4 +1,4 @@
-package com.elderbyte.security.spring;
+package com.elderbyte.security.spring.conditions;
 
 import org.springframework.boot.WebApplicationType;
 

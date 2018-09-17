@@ -1,6 +1,6 @@
 package com.elderbyte.security.spring.local;
 
-import com.elderbyte.security.spring.ReactiveWebApplicationCondition;
+import com.elderbyte.security.spring.conditions.ReactiveWebApplicationCondition;
 import com.elderbyte.security.spring.local.config.DefaultElderWebfluxSecurityConfig;
 import com.elderbyte.security.spring.mock.ElderSecurityWebfluxMockConfiguration;
 import org.springframework.context.annotation.Conditional;

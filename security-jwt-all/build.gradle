@@ -55,10 +55,8 @@ repositories {
 
 dependencies {
 
-    compile project(":security-jwt")
-
-    // Spring boot
-    compileOnly("io.projectreactor:reactor-core")
+    compile project(":security-jwt-servlet")
+    compile project(":security-jwt-webflux")
 
     // Test dependencies
     testCompile("org.springframework.boot:spring-boot-starter-test")

@@ -10,13 +10,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @SpringBootApplication
-public class MvcDemoServer {
+public class ServletDemoServer {
 
-    private static final Logger log = LoggerFactory.getLogger(MvcDemoServer.class);
+    private static final Logger log = LoggerFactory.getLogger(ServletDemoServer.class);
 
     public static void main(String[] args) throws UnknownHostException {
 
-        SpringApplication app = new SpringApplication(MvcDemoServer.class);
+        SpringApplication app = new SpringApplication(ServletDemoServer.class);
 
         Environment env = app.run(args).getEnvironment();
 

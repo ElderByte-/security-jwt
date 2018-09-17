@@ -58,12 +58,12 @@ dependencies {
     // Spring boot
     compile("org.springframework.boot:spring-boot-starter-security")
 
-    // Spring Cloud Feign
-    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
-
     // Utilities
     compile("com.nimbusds:nimbus-jose-jwt:${nimbusJwtVersion}")
     compile("com.github.ben-manes.caffeine:caffeine")
+
+    // Optional Spring Cloud Feign support
+    compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     // Test dependencies
     testCompile("org.springframework.boot:spring-boot-starter-test")

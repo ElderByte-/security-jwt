@@ -1,6 +1,8 @@
 include 'security-jwt'
-include 'security-jwt-mvc'
+include 'security-jwt-servlet'
 include 'security-jwt-webflux'
 
+include 'security-jwt-all'
+
 include 'demo-security-jwt-webflux'
-include 'demo-security-jwt-mvc'
+include 'demo-security-jwt-servlet'

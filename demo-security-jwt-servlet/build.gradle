@@ -44,14 +44,12 @@ repositories {
 
 dependencies {
 
-    compile project(":security-jwt-mvc")
+    compile project(":security-jwt-all")
 
     // Spring boot
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-web")
 
-    // Spring Cloud Feign
-    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     // Test dependencies
     testCompile("org.springframework.boot:spring-boot-starter-test")

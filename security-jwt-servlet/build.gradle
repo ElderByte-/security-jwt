@@ -58,15 +58,8 @@ dependencies {
     compile project(":security-jwt")
 
     // Spring boot
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("javax.servlet:javax.servlet-api")
+    compileOnly("javax.servlet:javax.servlet-api")
 
-    // Spring Cloud Feign
-    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
-
-    // Utilities
-    compile("com.nimbusds:nimbus-jose-jwt:${nimbusJwtVersion}")
-    compile("com.github.ben-manes.caffeine:caffeine")
 
     // Test dependencies
     testCompile("org.springframework.boot:spring-boot-starter-test")

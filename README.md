@@ -1,5 +1,9 @@
 
-[ ![Download](https://api.bintray.com/packages/elderbyte/maven/spring-security-jwt/images/download.svg) ](https://bintray.com/elderbyte/maven/spring-security-jwt/_latestVersion) 
+### security-jwt-all [ ![Download](https://api.bintray.com/packages/elderbyte/maven/security-jwt-all/images/download.svg) ](https://bintray.com/elderbyte/maven/security-jwt-all/_latestVersion)
+
+###  security-jwt-servlet [ ![Download](https://api.bintray.com/packages/elderbyte/maven/security-jwt-servlet/images/download.svg) ](https://bintray.com/elderbyte/maven/security-jwt-servlet/_latestVersion)
+
+### security-jwt-webflux [ ![Download](https://api.bintray.com/packages/elderbyte/maven/security-jwt-webflux/images/download.svg) ](https://bintray.com/elderbyte/maven/security-jwt-webflux/_latestVersion)
 
 
 # Spring Security JWT integration

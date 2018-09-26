@@ -42,7 +42,7 @@ public class JwtAuthenticationReactiveWebFilter implements WebFilter {
         var request = serverWebExchange.getRequest();
         String stringToken = extractAuthToken(request);
 
-        logger.info("Webflux HTTP Request {} with token: {}", request.getURI(), stringToken);
+        logger.trace("Webflux HTTP Request {} with token: {}", request.getURI(), stringToken);
 
         // Check if we have an Authorization header
 

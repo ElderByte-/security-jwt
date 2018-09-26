@@ -54,7 +54,7 @@ public class JwtAuthenticationReactiveWebFilter implements WebFilter {
                 logger.error("Authentication failed!", e);
             }
         }else{
-            logger.debug("HTTP request without JWT Authorization!");
+            logger.debug("HTTP request without JWT Authorization: " + request.getURI());
         }
 
         return webFilterChain.filter(serverWebExchange);

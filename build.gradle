@@ -26,7 +26,6 @@ subprojects {
         springCloudVersion = 'Finchley.SR1'
 
         nimbusJwtVersion = '6.0.1'
-        //feignOkHttpVersion = '9.5.0'
 
         bintrayVersion = '1.8.4'
     }

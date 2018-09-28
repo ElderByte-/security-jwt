@@ -13,7 +13,7 @@ public class ElderSecurityWebfluxMockConfiguration {
 
     @Bean
     public WebFilter MockAuthenticationFilter(MockJwtHolder jwtHolder){
-        return new MockAuthenticationFilter(jwtHolder);
+        return new MockAuthenticationWebFluxFilter(jwtHolder);
     }
 
 }

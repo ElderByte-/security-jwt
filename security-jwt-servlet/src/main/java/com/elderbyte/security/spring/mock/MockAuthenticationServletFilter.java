@@ -22,13 +22,13 @@ import java.io.IOException;
  * This is intended to ease development of Warden protected Clients.
  */
 @Order(100)
-public class MockAuthenticationFilter extends OncePerRequestFilter {
+public class MockAuthenticationServletFilter extends OncePerRequestFilter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MockJwtHolder mockJwtHolder;
 
-    public MockAuthenticationFilter(MockJwtHolder mockJwtHolder){
+    public MockAuthenticationServletFilter(MockJwtHolder mockJwtHolder){
         if(mockJwtHolder == null) throw new IllegalArgumentException("mockJwtHolder must not be NULL!");
         this.mockJwtHolder = mockJwtHolder;
     }

@@ -14,7 +14,7 @@ public class ElderSecurityMvcMockConfiguration {
 
     @Bean
     public Filter MockAuthenticationFilter(MockJwtHolder jwtHolder){
-        return new MockAuthenticationFilter(jwtHolder);
+        return new MockAuthenticationServletFilter(jwtHolder);
     }
 
 }

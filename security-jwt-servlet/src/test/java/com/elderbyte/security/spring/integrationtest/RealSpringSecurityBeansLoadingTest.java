@@ -1,10 +1,9 @@
 package com.elderbyte.security.spring.integrationtest;
 
 import com.elderbyte.security.ElderSecurityJwtSettings;
-import com.elderbyte.security.spring.settings.ElderSecurityJwtSettingsFallback;
 import com.elderbyte.security.spring.local.auth.LocalAuthService;
 import com.elderbyte.security.spring.local.jwt.JwtAuthenticationFilter;
-import com.elderbyte.security.spring.mock.MockAuthenticationFilter;
+import com.elderbyte.security.spring.mock.MockAuthenticationServletFilter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +44,7 @@ public class RealSpringSecurityBeansLoadingTest {
 
     @Test(expected = NoSuchBeanDefinitionException.class)
     public void ensureMockAuthenticationFilterIsNotPresent(){
-        applicationContext.getBean(MockAuthenticationFilter.class); // Expect bean to be missing
+        applicationContext.getBean(MockAuthenticationServletFilter.class); // Expect bean to be missing
 
     }
 

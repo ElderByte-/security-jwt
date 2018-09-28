@@ -19,13 +19,13 @@ import reactor.core.publisher.Mono;
  * This is intended to ease development of Warden protected Clients.
  */
 @Order(100)
-public class MockAuthenticationFilter implements WebFilter {
+public class MockAuthenticationWebFluxFilter implements WebFilter {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final MockJwtHolder mockJwtHolder;
 
-    public MockAuthenticationFilter(MockJwtHolder mockJwtHolder){
+    public MockAuthenticationWebFluxFilter(MockJwtHolder mockJwtHolder){
         if(mockJwtHolder == null) throw new IllegalArgumentException("mockJwtHolder must not be NULL!");
         this.mockJwtHolder = mockJwtHolder;
     }

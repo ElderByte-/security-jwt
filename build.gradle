@@ -9,7 +9,7 @@ buildscript {
 }
 
 allprojects {
-    version =  '4.0.4'
+    version =  '5.0.0'
     group = 'com.elderbyte.security'
 
     tasks.withType(Javadoc) {
@@ -21,13 +21,11 @@ allprojects {
 
 subprojects {
     ext {
-        springBootVersionBase = '2.0.4'
-        springBootVersion = '2.0.4.RELEASE'
-        springCloudVersion = 'Finchley.SR1'
+        springBootVersionBase = '2.1.0'
+        springBootVersion = springBootVersionBase + '.RELEASE'
+        springCloudVersion = 'Greenwich.M1'
 
-        nimbusJwtVersion = '6.0.1'
-
-        bintrayVersion = '1.8.4'
+        nimbusJwtVersion = '6.2'
     }
 
     tasks.withType(Javadoc) {

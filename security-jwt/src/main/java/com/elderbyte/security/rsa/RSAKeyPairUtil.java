@@ -20,6 +20,10 @@ public class RSAKeyPairUtil {
 
 
     public static KeyPair generateRSAKeyPair(){
+        return generateRSAKeyPair(2048);
+    }
+
+    public static KeyPair generateRSAKeyPair(int keySize){
 
         KeyPair kp = null;
 
@@ -29,16 +33,14 @@ public class RSAKeyPairUtil {
         KeyPairGenerator keyGenerator = null;
         try {
             keyGenerator = KeyPairGenerator.getInstance("RSA");
-            keyGenerator.initialize(1024);
+            keyGenerator.initialize(keySize);
             kp = keyGenerator.genKeyPair();
         } catch (NoSuchAlgorithmException e) {
-            logger.error("Failed to generate keypair", e);
+            logger.error("Failed to generate RSA keypair with size " + keySize, e);
         }
 
         return kp;
     }
-
-
 
     public static RSAPrivateKey loadRSAPrivateKey(String key64) throws GeneralSecurityException {
         byte[] clear = base64Decode(key64);
@@ -67,7 +69,6 @@ public class RSAKeyPairUtil {
         Arrays.fill(packed, (byte) 0);
         return key64;
     }
-
 
     public static String serializeRSAPublicKey(RSAPublicKey publ) throws GeneralSecurityException {
         KeyFactory fact = KeyFactory.getInstance("RSA");

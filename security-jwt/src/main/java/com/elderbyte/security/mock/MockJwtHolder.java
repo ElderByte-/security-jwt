@@ -58,21 +58,36 @@ public class MockJwtHolder implements InitializingBean {
             // Load a constant mock RSA key so we can even support inter service communication.
 
             mockPublicKey = RSAKeyPairUtil.loadRSAPublicKey(
-                    "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCid7XA8oiQpSeN/AubqVX6KQF0Ui5Li/wZtyHqKW/b7lvI" +
-                    "JbNRLDk2kUztjux0XiU7cr+KabxVD3JjnyhEkmaWI3yCMrNPGZztl4xmhuRkgjcfSuk9BmL3KotRwgiK+1yP" +
-                    "eSqL3VPjYn24Ucun9t4A2GKX5DpwTs+KIBdw3oT+ewIDAQAB");
+                    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnklC8EwRnfkv9jqMeAYiJbhCKo3B1I/" +
+                            "GoPrLoxDmRIiCY+kkDuKdKcCwVqiOb1v8LtD25wP9QeeG4S2DA2gOUyP/fUxdb5W/6dlgXS3Cx" +
+                            "8QjE2Nt9VfTnqiVkJQZgPG/VA1Lh/Oodc4vIr8/GWVKjQ60IgzgmtY8ljcVmlTgmYJ4fHSAVQp" +
+                            "wsoiN/kTIZX6lrWnEFp6II3jRpJ+Az6PWPP5E33E8yDWkYTdhmQFpa8DnJci0txjdz2xN/Ukul" +
+                            "TY8G4X1PbYvkPqqGCnDd24xMWl6ioqRb7MFuOLTC16/e8EEm04CutOobxk+pFwpkHxaQldsXgv" +
+                            "HFz5RGhVrcBJvCQIDAQAB");
 
             mockPrivateKey = RSAKeyPairUtil.loadRSAPrivateKey(
-                    "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKJ3tcDyiJClJ438C5upVfopAXRSLkuL/Bm3I" +
-                    "eopb9vuW8gls1EsOTaRTO2O7HReJTtyv4ppvFUPcmOfKESSZpYjfIIys08ZnO2XjGaG5GSCNx9K6T0GYvcqi1" +
-                    "HCCIr7XI95KovdU+NifbhRy6f23gDYYpfkOnBOz4ogF3DehP57AgMBAAECgYALxn1n5Kw9P5skUVZOC/HtVbe" +
-                    "DRMmSNC0rd/h/Tk2LNTV1xjW+9mOXLuTSev9sV75/FowHbi52Q85Yphp3Dd1deqTp3E6LpGQ/6MebeN3Q5h+6" +
-                    "8ZAFZ5sabbGV6ZqPu5IMuxuQ4sKxoKTu1G0kVaacA9gxWrHERI1SEN6BfmlvMQJBAOVGa//nUz0v0IDpooVEp" +
-                    "kLgElpvZjoKnKh9RPvZa6Gfg5pdPtJXccuyRXZFOya9T33sg4hAMD2wH6ezg/Bmj30CQQC1Z8Ad3SAHHd9FAu" +
-                    "Z5M21olumDxauz2XvFo1wLCTdhZzrN3O5HQ1koEJHvd7mEMWsM13TkDiOzedFmJKIuvhdXAkEAsH6fkOVwbH+" +
-                    "sUDCKTXDlVEHNnxR2a2PT6NhWDFH4yvhShLgXLjDmhtn7Iup0eIPu947kSjSvbi1wkNZeUOeCuQJBALFFGMVW" +
-                    "MBUkSOmcgvKPoeviBYHiqf7PmZcyIyEZuYeypBFGQ4daNgbj4mh7u8uFq1HaPn0ZoCOj+E/znpVE53MCQQDMX" +
-                    "LPfvkeOVYd4kN14hKsa0M3Ca3+xcSCNSlL/lBfSzErDSLbcrw1attnCs6mAENG1frYh6pJOc66u09QT3UZM");
+                    "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCeSULwTBGd+S/2Oox4BiIluEI" +
+                            "qjcHUj8ag+sujEOZEiIJj6SQO4p0pwLBWqI5vW/wu0PbnA/1B54bhLYMDaA5TI/99TF1vlb/p2" +
+                            "WBdLcLHxCMTY231V9OeqJWQlBmA8b9UDUuH86h1zi8ivz8ZZUqNDrQiDOCa1jyWNxWaVOCZgnh" +
+                            "8dIBVCnCyiI3+RMhlfqWtacQWnogjeNGkn4DPo9Y8/kTfcTzINaRhN2GZAWlrwOclyLS3GN3Pb" +
+                            "E39SS6VNjwbhfU9ti+Q+qoYKcN3bjExaXqKipFvswW44tMLXr97wQSbTgK606hvGT6kXCmQfFp" +
+                            "CV2xeC8cXPlEaFWtwEm8JAgMBAAECggEAWoR+2ThHItXrzZ2x0rl/MZ7rh7ZFUC9gYZLKfVget" +
+                            "rZyCny6+CAzzDq7HPOLcLdjwcoSSA4J+HRUt9T1BS+ucXE2nArdrAAxHaQH7YFL0D2j6WSE7zb" +
+                            "od+Tkkyd+ZjTZO1HXDcoTXjsozXAcv4MjXQM5k/dVQnadczHREs7TGjWSDq8Ce3sjzyCfofjp0" +
+                            "1+doqQMpboplA273OiPVxn16vamEE+IDBi2rn3efYFOsSTfRJLn29qUFCrmojmOH/jnEHN9n8i" +
+                            "40NlS/A4d+ZJvisUBdT02XaVP6enR8smnIe6m2SpqQZ6Ne4QPjcdIDzEfrdKZUMLPTaIAVAwAN" +
+                            "rMZ+QKBgQDR2gdNY1u+d8ZDOuztNhD/ZZNm69PsXt6TjhGySj1473UQgLr9OqpJfulxPIwLtuY" +
+                            "Hapcz0UpPh+q+XaWeiXpae1JHuS68SHVxlNtdh5K9Vluu9wsK7T3La+Nei+ZFmvKcaUFUeaL6A" +
+                            "TvNytX3j0fl3Q6X4UWTW2jY1YLcSybynwKBgQDBGEMWNf3h2eWkdZs8P0eACm6HZVojq2pqKzv" +
+                            "8ueC8YSnXYmA75OrJslXwEJyumxs3UWKSdgNX++lCQ+3SyOVEpcyaOBrrpIdTY5c6BJCmKYVbl" +
+                            "6kIA2jagz+4EBQlzx3GLFSZFE6emF5bDBtBYle46hykNmrco71wk4FpkhslVwKBgQCjr0wI2hp" +
+                            "iq+xS3nCV6plBjUp3ejV4Ztt3/tXg2rWuUiFeuPqhsRPIdhzCfbbDIGu2lzbPbU1oUZ0R1dvsm" +
+                            "FF+qDiax2Aj7uTkrnaZMrmLxAOJqxrK8BhGRqY4RilcW6snw5X4vVQZa8LpF3DkQ7eSHWZXo5h" +
+                            "wg1l54LjM+jWsAwKBgQCwvJVC8h4zp24yjlaM2VqHToUGNnU/qrjW/kWEt1mE8uYKNwfgKlHgV" +
+                            "POlrH7MrjlF857mcU/0KyXAOk6mnKyEncDc8zdosYoPgFs9hkojXGOshu7237AMOQ+MWGMojB8" +
+                            "zcQXpqxWewdWzPiyANxQVs2qNvyUmWFSfgtNznoBsNwKBgD4MB9aXw9sbBJH/g1yPT+6/km1rl" +
+                            "Q+/d9WEN+9Sy5LGrH5HZdjW9RqmfhJLT8MVVWlEBpesXtWRB/4wvJAg7zDvohXqg8+6hcH4MRA" +
+                            "QP2JgllUyTl5gtOSdfupAOJmIG+qnQWZ5ILXjGwh/pjO2VLRWGwcCPBGOk1DsapyYz50D");
 
         } catch (GeneralSecurityException e) {
             throw new IllegalStateException("Failed to load mock RSA Key", e);

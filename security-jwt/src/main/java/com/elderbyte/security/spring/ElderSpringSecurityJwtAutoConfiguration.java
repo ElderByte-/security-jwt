@@ -6,7 +6,7 @@ import com.elderbyte.security.spring.mock.ElderSecurityMockConfiguration;
 import com.elderbyte.security.spring.settings.ElderSpringSecurityJwtSettingsConfig;
 import com.elderbyte.security.spring.local.feign.DefaultFeignSecurityConfiguration;
 import com.elderbyte.security.spring.local.jwt.*;
-import com.elderbyte.security.rsa.PropertyRSAPublicKeyProvider;
+import com.elderbyte.security.rsa.DefaultRSAPublicKeyProvider;
 import com.elderbyte.security.rsa.RSAPublicKeyProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -64,7 +64,7 @@ public class ElderSpringSecurityJwtAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(RSAPublicKeyProvider.class)
     public RSAPublicKeyProvider RSAPublicKeyProvider(){
-        return new PropertyRSAPublicKeyProvider(clientSettings);
+        return new DefaultRSAPublicKeyProvider(clientSettings);
     }
 
     @Bean

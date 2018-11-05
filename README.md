@@ -19,13 +19,14 @@ This project provides an out of the box working JWT integration into Spring secu
 
 **elder.security.jwt.realm** *[string]* (optional)
 
-Define the identity name of the realm / audience. Incomming JWT tokens must have a matching realm / audience claim to be accepted. 
+Define the identity name of the realm / audience. Incoming JWT tokens must have a matching realm / audience claim to be accepted.
 
 
-**elder.security.jwt.publicKeyValue** *[string]* (required)
+**elder.security.jwt.publicKey.value** *[string]*
+**elder.security.jwt.publicKey.url** *[string]*
 
-Configure the Public Key used to verify incomming JWT Tokens. This property is required by the default `RSAPublicKeyProvider`.
-If desired, you may overwrite the `RSAPublicKeyProvider` with Spring configuration and use your own logic to retirve it.
+Configure the Public Key (or the url to obtain the public key) used to verify incoming JWT Tokens. This property is required by the default `RSAPublicKeyProvider`.
+If desired, you may overwrite the `RSAPublicKeyProvider` with Spring configuration and use your own logic to retrieve it.
 
 
 ### Securing your methods and endpoints

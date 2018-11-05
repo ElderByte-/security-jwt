@@ -13,6 +13,13 @@ public class ElderSecurityJwtSettingsFallback implements ElderSecurityJwtSetting
     private final ElderSpringSecurityJwtProperties elderSpringSecurityJwtProperties;
     private final LegacySpringSecurityJwtProperties legacySpringSecurityJwtProperties;
 
+
+    public ElderSecurityJwtSettingsFallback(
+            ElderSpringSecurityJwtProperties elderSpringSecurityJwtProperties
+    ){
+        this(elderSpringSecurityJwtProperties, null);
+    }
+
     public ElderSecurityJwtSettingsFallback(
             ElderSpringSecurityJwtProperties elderSpringSecurityJwtProperties,
             LegacySpringSecurityJwtProperties legacySpringSecurityJwtProperties
@@ -32,10 +39,10 @@ public class ElderSecurityJwtSettingsFallback implements ElderSecurityJwtSetting
         }
     }
 
-    public String getPublicKeyValue() {
-        var pubkey = elderSpringSecurityJwtProperties.getPublicKeyValue();
+    public TokenKeyProperties getPublicKey() {
+        var pubkey = elderSpringSecurityJwtProperties.getPublicKey();
         if(pubkey == null){
-            return legacySpringSecurityJwtProperties.getPublicKeyValue();
+            return legacySpringSecurityJwtProperties.getPublicKey();
         }else{
             return pubkey;
         }

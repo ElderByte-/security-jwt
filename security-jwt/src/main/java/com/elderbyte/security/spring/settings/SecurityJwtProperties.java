@@ -22,7 +22,7 @@ public class SecurityJwtProperties {
      * This public key must be the counterpart of the authentication server's private key used to sign the token.
      *
      */
-    private String publicKeyValue;
+    private TokenKeyProperties publicKey = new TokenKeyProperties();
 
     private boolean enableMock;
 
@@ -37,13 +37,6 @@ public class SecurityJwtProperties {
         this.realm = realm;
     }
 
-    public String getPublicKeyValue() {
-        return publicKeyValue;
-    }
-
-    public void setPublicKeyValue(String publicKeyValue) {
-        this.publicKeyValue = publicKeyValue;
-    }
 
     public boolean isEnableMock() {
         return enableMock;
@@ -59,5 +52,13 @@ public class SecurityJwtProperties {
 
     public void setMockUsers(List<MockUser> mockUsers) {
         this.mockUsers = mockUsers;
+    }
+
+    public TokenKeyProperties getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(TokenKeyProperties publicKey) {
+        this.publicKey = publicKey;
     }
 }
